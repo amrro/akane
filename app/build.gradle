@@ -1,0 +1,51 @@
+
+import app.akane.Deps
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+if (file("google-services.json").exists()) {
+    apply plugin: 'com.google.gms.google-services'
+    apply plugin: 'io.fabric'
+}
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "app.akane"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation Deps.Kotlin.stdlib
+    implementation Deps.AndroidX.appcompat
+    implementation Deps.AndroidX.corekts
+    implementation Deps.Google.material
+    implementation Deps.AndroidX.constraint
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation Deps.API.jraw
+
+    implementation Deps.Dagger.androidSupport
+    kapt Deps.Dagger.compiler
+    kapt Deps.Dagger.androidProcessor
+
+    implementation Deps.Coroutines.core
+    implementation Deps.Coroutines.android
+    //
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+}
