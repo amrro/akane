@@ -16,6 +16,7 @@
 
 package app.akane.di
 
+import app.akane.ui.feed.home.HomeFeedFragment
 import app.akane.ui.feed.popular.PopularFeedFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -27,6 +28,8 @@ abstract class FragmentBuildersModule {
     @ContributesAndroidInjector
     abstract fun contributePopularFeedFragment(): PopularFeedFragment
 
+    @ContributesAndroidInjector
+    abstract fun contributeHomeFeedFragment(): HomeFeedFragment
 
 
 }
