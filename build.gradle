@@ -1,4 +1,5 @@
 
+
 import app.akane.Deps
 
 buildscript {
@@ -27,4 +28,21 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+allprojects {
+
+    tasks.withType(JavaCompile).all {
+        options.compilerArgs += [
+                "-Adagger.formatGeneratedSource=disabled",
+                "-Adagger.gradle.incremental=enabled"
+        ]
+    }
+
+    afterEvaluate {
+        extensions.findByName('kapt')?.arguments {
+            arg("dagger.formatGeneratedSource", "disabled")
+            arg("dagger.gradle.incremental", "enabled")
+        }
+    }
 }

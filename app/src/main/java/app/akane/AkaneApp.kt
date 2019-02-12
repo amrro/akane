@@ -19,7 +19,7 @@ class AkaneApp : Application(), HasActivityInjector {
 
 
     @Inject
-    lateinit var MainaccountHelper: AccountHelper
+    lateinit var mainAccountHelper: AccountHelper
 
     @Inject
     lateinit var tokenStorePrefs: SharedPreferencesTokenStore
@@ -31,7 +31,7 @@ class AkaneApp : Application(), HasActivityInjector {
 
         // Every time we use the AccountHelper to switch between accounts (from one account to
         // another, or into/out of userless mode), call this function
-        MainaccountHelper.onSwitch { redditClient ->
+        mainAccountHelper.onSwitch { redditClient ->
             // By default, JRAW logs HTTP activity to System.out. We're going to use Log.i()
             // instead.
             val logAdapter = SimpleAndroidLogAdapter(Log.INFO)
@@ -48,10 +48,6 @@ class AkaneApp : Application(), HasActivityInjector {
     override fun activityInjector() = dispatchingAndroidInjector
 
     fun getAccountHelper(): AccountHelper {
-        return MainaccountHelper
-    }
-
-    fun getTokenStore(): SharedPreferencesTokenStore {
-        return tokenStorePrefs
+        return mainAccountHelper
     }
 }

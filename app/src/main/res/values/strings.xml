@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">Akane for Reddit</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_home">Home</string>
+    <string name="tab_popular">Popular</string>
+
+    <string name="dot_separator">·</string>
+    <string name="tab_all">All</string>
+
+
 </resources>

@@ -1,9 +1,9 @@
-
 import app.akane.Deps
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 
 if (file("google-services.json").exists()) {
     apply plugin: 'com.google.gms.google-services'
@@ -26,6 +26,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -39,8 +43,19 @@ dependencies {
     implementation Deps.API.jraw
 
     implementation Deps.Dagger.androidSupport
+    implementation Deps.AndroidX.legacy
+//    implementation Deps.AndroidX.viewpager
     kapt Deps.Dagger.compiler
     kapt Deps.Dagger.androidProcessor
+
+    compileOnly Deps.AssistedInject.annotationDagger2
+    kapt Deps.AssistedInject.processorDagger2
+
+    implementation Deps.Epoxy.epoxy
+    implementation Deps.Epoxy.paging
+    implementation Deps.Epoxy.dataBinding
+    kapt Deps.Epoxy.processor
+    implementation "androidx.paging:paging-runtime-ktx:2.1.0"
 
     implementation Deps.Coroutines.core
     implementation Deps.Coroutines.android

@@ -16,13 +16,17 @@
 
 package app.akane.di
 
+import app.akane.ui.feed.popular.PopularFeedFragment
 import dagger.Module
+import dagger.android.ContributesAndroidInjector
 
 @Suppress("unused")
 @Module
 abstract class FragmentBuildersModule {
 
-//    @ContributesAndroidInjector
-//    abstract fun contributeRepoFragment(): RepoFragment
+    @ContributesAndroidInjector
+    abstract fun contributePopularFeedFragment(): PopularFeedFragment
+
+
 
 }
