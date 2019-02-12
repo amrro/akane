@@ -27,6 +27,12 @@ object Deps {
         val viewpager = "androidx.viewpager2:viewpager2:1.0.0-alpha01"
     }
 
+    object Glide {
+        private const val version = "4.8.0"
+        val glide = "com.github.bumptech.glide:glide:$version"
+        val compiler = "com.github.bumptech.glide:compiler:$version"
+    }
+
 
     object Dagger {
         private const val version = "2.21"

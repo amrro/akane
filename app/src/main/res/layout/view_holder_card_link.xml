@@ -25,10 +25,10 @@
 
             <TextView
                 android:id="@+id/subreddit_name"
+                subreddit="@{submission.subreddit}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{submission.subreddit}"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="4dp"
                 android:textColor="@android:color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/in_placeholder"
                 app:layout_constraintStart_toEndOf="@+id/in_placeholder"
@@ -36,13 +36,28 @@
                 tools:text="r/gifs" />
 
             <TextView
+                android:id="@+id/in_placeholder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/josefin_sans"
+                android:text="to"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/username"
+                app:layout_constraintStart_toEndOf="@+id/username"
+                app:layout_constraintTop_toTopOf="@+id/username" />
+
+            <TextView
                 android:id="@+id/username"
-                android:text="@{submission.author}"
+                username="@{submission.author}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
+                android:fontFamily="@font/rubik_regular"
+                android:textColor="@android:color/black"
                 app:layout_constraintEnd_toStartOf="@+id/btn_save"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -55,6 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="@string/dot_separator"
+                android:textColor="@android:color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/subreddit_name"
                 app:layout_constraintStart_toEndOf="@+id/subreddit_name"
                 app:layout_constraintTop_toTopOf="@+id/subreddit_name" />
@@ -78,14 +94,15 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
+                android:fontFamily="@font/rubik_regular"
                 android:text="@{submission.title}"
-                tools:text="Are we alone in the whole universe?"
                 android:textAppearance="@android:style/TextAppearance.Material.Title"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/share"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/username" />
+                app:layout_constraintTop_toBottomOf="@+id/username"
+                tools:text="Are we alone in the whole universe?" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/share"
@@ -170,17 +187,6 @@
                     tools:layout_editor_absoluteX="118dp"
                     tools:layout_editor_absoluteY="500dp" />
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/in_placeholder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="in"
-                android:textAllCaps="false"
-                app:layout_constraintBottom_toBottomOf="@+id/username"
-                app:layout_constraintStart_toEndOf="@+id/username"
-                app:layout_constraintTop_toTopOf="@+id/username" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

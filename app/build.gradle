@@ -57,6 +57,9 @@ dependencies {
     kapt Deps.Epoxy.processor
     implementation "androidx.paging:paging-runtime-ktx:2.1.0"
 
+    implementation Deps.Glide.glide
+    kapt Deps.Glide.compiler
+
     implementation Deps.Coroutines.core
     implementation Deps.Coroutines.android
     //
