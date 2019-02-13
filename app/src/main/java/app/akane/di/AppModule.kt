@@ -11,7 +11,7 @@ import net.dean.jraw.oauth.AccountHelper
 import java.util.*
 import javax.inject.Singleton
 
-@Module(/*includes = [ViewModelModule::class]*/)
+@Module(includes = [ViewModelModule::class])
 class AppModule {
 
     @Singleton

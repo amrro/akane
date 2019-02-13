@@ -56,7 +56,7 @@ public class NewUserActivity extends AppCompatActivity {
         });
 
         // Generate an authentication URL
-        String[] scopes = new String[]{ "read", "identity" };
+        String[] scopes = new String[]{ "read", "identity", "vote" };
         String authUrl = helper.getAuthorizationUrl(true, true, scopes);
 
         // Finally, show the authorization URL to the user

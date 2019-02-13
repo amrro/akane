@@ -12,6 +12,14 @@ import app.akane.databinding.FragmentSubmissionsListBinding
 import app.akane.di.Injectable
 import app.akane.repo.PopularFeedDataSource
 import app.akane.ui.feed.PageViewModel
+import app.akane.ui.feed.home.HomeViewModel
+import app.akane.util.SnackbarMessage
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import net.dean.jraw.models.Submission
+import net.dean.jraw.models.VoteDirection
 import net.dean.jraw.oauth.AccountHelper
 import javax.inject.Inject
 
@@ -25,13 +33,25 @@ class PopularFeedFragment : Fragment(), Injectable {
     private lateinit var pageViewModel: PageViewModel
     private lateinit var controller: SubmissionsFeedController
 
+
+    @Inject
+    lateinit var homeViewModel: HomeViewModel
+
+
     @Inject
     lateinit var accountHelper: AccountHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         pageViewModel = ViewModelProviders.of(this).get(PageViewModel::class.java)
-        controller = SubmissionsFeedController()
+        controller = SubmissionsFeedController(object: SubmissionsFeedController.Callback {
+            override fun vote(submission: Submission, dir: VoteDirection) {
+                GlobalScope.launch(Dispatchers.IO) {
+                    homeViewModel.vote(submission, dir)
+                }
+            }
+        })
+
     }
 
     override fun onCreateView(
@@ -52,5 +72,16 @@ class PopularFeedFragment : Fragment(), Injectable {
             controller.submitList(it)
         })
 
+    }
+
+    private fun setupSnackbar() {
+        homeViewModel.snackbarMessage.observe(this, object: SnackbarMessage.SnackbarObserver {
+            override fun onNewMessage(snackbarMessageResourceId: String) {
+                view?.let {
+                    Snackbar.make(it, snackbarMessageResourceId, Snackbar.LENGTH_LONG)
+                            .show()
+                }
+            }
+        })
     }
 }

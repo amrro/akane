@@ -4,9 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="submission"
             type="net.dean.jraw.models.Submission" />
+
+        <variable
+            name="callbacks"
+            type="app.akane.ui.feed.popular.SubmissionsFeedController.Callback" />
+
+        <import type="net.dean.jraw.models.VoteDirection" />
 
     </data>
 
@@ -162,6 +169,7 @@
                     android:layout_width="24dp"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
+                    android:onClick="@{v -> callbacks.vote(submission, VoteDirection.UP)}"
                     android:src="@drawable/ic_round_arrow_upward_24px"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="501dp" />
@@ -178,6 +186,7 @@
                     tools:text="@tools:sample/us_zipcodes" />
 
                 <ImageButton
+                    android:onClick="@{v -> callbacks.vote(submission, VoteDirection.DOWN)}"
                     android:id="@+id/downvote"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="24dp"
