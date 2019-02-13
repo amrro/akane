@@ -8,6 +8,9 @@ import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import app.akane.R
+import org.threeten.bp.Duration
+import org.threeten.bp.Instant
+import java.util.*
 
 /**
  * Data Binding adapters specific to the app.
@@ -47,6 +50,26 @@ object BindingAdapters {
                 0, 2,
                 Spannable.SPAN_EXCLUSIVE_INCLUSIVE
         )
+    }
+
+
+    /**
+     * TODO: This method is needed to be tested and optimized to be more accurate.
+     */
+    @JvmStatic
+    @BindingAdapter("since")
+    fun since(textView: TextView, date: Date) {
+        val submissionInstant = Instant.ofEpochMilli(date.time)
+        val duration = Duration.between(submissionInstant, Instant.now())
+
+        val diff = when {
+            duration.toDays() > 0L -> "${duration.toDays()}d"
+            duration.toHours() > 0L -> "${duration.toHours()}h"
+            duration.toMinutes() > 0L -> "${duration.toMinutes()}m"
+            else -> "${duration.seconds}S"
+        }
+
+        textView.text = diff
     }
 
 }

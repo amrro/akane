@@ -77,7 +77,7 @@
 
             <TextView
                 android:id="@+id/date"
-                android:text="@{submission.created.toString()}"
+                since="@{submission.created}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"

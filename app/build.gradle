@@ -60,6 +60,9 @@ dependencies {
     implementation Deps.Glide.glide
     kapt Deps.Glide.compiler
 
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.1.1'
+
+
     implementation Deps.Coroutines.core
     implementation Deps.Coroutines.android
     //
