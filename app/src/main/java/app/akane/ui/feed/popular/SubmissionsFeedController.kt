@@ -13,6 +13,8 @@ class SubmissionsFeedController(
 
     public interface Callback {
         fun vote(submission: Submission, dir: VoteDirection)
+        fun save(submission: Submission, save: Boolean)
+        fun hide(submission: Submission, hide: Boolean)
     }
 
     override fun buildItemModel(currentPosition: Int, item: Submission?): EpoxyModel<*> {

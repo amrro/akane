@@ -15,23 +15,43 @@ class HomeViewModel @Inject constructor(
         val accountHelper: AccountHelper
 ) : ViewModel() {
 
+    val reddit = accountHelper.reddit
+
     val snackbarMessage = SnackbarMessage()
 
     fun vote(submission: Submission, dir: VoteDirection) {
         GlobalScope.launch(Dispatchers.IO) {
             try {
-                submission.toReference(accountHelper.reddit).setVote(dir)
+                val subRef = submission.toReference(reddit)
+                subRef.setVote(
+                        if (subRef.inspect().vote == dir) VoteDirection.NONE
+                        else dir
+                )
             } catch (e: ApiException) {
                 snackbarMessage.value = e.explanation
             }
         }
     }
 
-    fun hideSubmission() {
+    fun hideSubmission(submission: Submission, hide: Boolean = true) {
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                val subRef = submission.toReference(reddit)
+                subRef.setHidden(!subRef.inspect().isHidden)
+            } catch (e: ApiException) {
+                snackbarMessage.value = e.explanation
+            }
+        }
 
     }
 
-    fun saveSubmission() {
+    fun saveSubmission(submission: Submission, save: Boolean) {
+        try {
+            val submissionReference = submission.toReference(reddit)
+            submissionReference.setSaved(!submissionReference.inspect().isSaved)
+        } catch (e: ApiException) {
+            snackbarMessage.value = e.explanation
+        }
 
     }
 }

@@ -15,9 +15,6 @@ import app.akane.ui.feed.PageViewModel
 import app.akane.ui.feed.home.HomeViewModel
 import app.akane.util.SnackbarMessage
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import net.dean.jraw.models.Submission
 import net.dean.jraw.models.VoteDirection
 import net.dean.jraw.oauth.AccountHelper
@@ -44,11 +41,17 @@ class PopularFeedFragment : Fragment(), Injectable {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         pageViewModel = ViewModelProviders.of(this).get(PageViewModel::class.java)
-        controller = SubmissionsFeedController(object: SubmissionsFeedController.Callback {
+        controller = SubmissionsFeedController(object : SubmissionsFeedController.Callback {
             override fun vote(submission: Submission, dir: VoteDirection) {
-                GlobalScope.launch(Dispatchers.IO) {
-                    homeViewModel.vote(submission, dir)
-                }
+                homeViewModel.vote(submission, dir)
+            }
+
+            override fun save(submission: Submission, save: Boolean) {
+                homeViewModel.saveSubmission(submission, save)
+            }
+
+            override fun hide(submission: Submission, hide: Boolean) {
+                homeViewModel.hideSubmission(submission, hide)
             }
         })
 
@@ -75,7 +78,7 @@ class PopularFeedFragment : Fragment(), Injectable {
     }
 
     private fun setupSnackbar() {
-        homeViewModel.snackbarMessage.observe(this, object: SnackbarMessage.SnackbarObserver {
+        homeViewModel.snackbarMessage.observe(this, object : SnackbarMessage.SnackbarObserver {
             override fun onNewMessage(snackbarMessageResourceId: String) {
                 view?.let {
                     Snackbar.make(it, snackbarMessageResourceId, Snackbar.LENGTH_LONG)
