@@ -6,7 +6,8 @@ import com.airbnb.epoxy.paging.PagedListEpoxyController
 import net.dean.jraw.models.Submission
 import net.dean.jraw.models.VoteDirection
 
-class SubmissionsFeedController(
+class SubmissionsFeedController
+(
         val callbacks: Callback
 ) : PagedListEpoxyController<Submission>() {
 

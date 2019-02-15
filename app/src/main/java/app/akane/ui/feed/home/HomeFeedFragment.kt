@@ -59,10 +59,12 @@ class HomeFeedFragment : BaseMvRxFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupSnackbar()
+        binding.feedSwipeRefresh.setOnRefreshListener(homeViewModel::refresh)
     }
 
     override fun invalidate() {
         withState(homeViewModel) { state ->
+            binding.state = state
             if (state.homeFeed != null) {
                 // PagingEpoxyController does not like being updated before it has a list
                 controller.submitList(state.homeFeed)

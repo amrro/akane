@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import app.akane.ui.feed.SectionsPagerAdapter
+import app.akane.ui.feed.auth.NewUserActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import dagger.android.DispatchingAndroidInjector

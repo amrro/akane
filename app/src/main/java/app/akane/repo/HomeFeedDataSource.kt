@@ -11,7 +11,7 @@ class HomeFeedDataSource constructor(
 ) : PageKeyedDataSource<Int, Submission>() {
 
 
-    class Factory(val accountHelper: AccountHelper) : DataSource.Factory<Int, Submission>() {
+    class Factory(private val accountHelper: AccountHelper) : DataSource.Factory<Int, Submission>() {
         override fun create(): DataSource<Int, Submission> {
             return HomeFeedDataSource(accountHelper)
         }

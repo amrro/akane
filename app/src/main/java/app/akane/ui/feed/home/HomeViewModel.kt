@@ -23,22 +23,22 @@ import net.dean.jraw.oauth.AccountHelper
 import timber.log.Timber
 
 class HomeViewModel @AssistedInject constructor(
-        @Assisted val initialState: HomeViewState,
+        @Assisted val initialState: FeedViewState,
         val accountHelper: AccountHelper,
-        homeFeedDataSource: HomeFeedDataSource.Factory
-) : BaseMvRxViewModel<HomeViewState>(initialState, debugMode = true) {
+        val factory: HomeFeedDataSource.Factory
+) : BaseMvRxViewModel<FeedViewState>(initialState, debugMode = false) {
 
     private val reddit = accountHelper.reddit
     val snackbarMessage = SnackbarMessage()
     private val pagedListDisposal: Observable<PagedList<Submission>>
 
     init {
-        pagedListDisposal = pagedList(homeFeedDataSource)
+        pagedListDisposal = pagedList(factory)
         refresh()
     }
 
     private fun pagedList(factory: HomeFeedDataSource.Factory): Observable<PagedList<Submission>> {
-        return RxPagedListBuilder(factory, PAGIN_CONFIG)
+        return RxPagedListBuilder(factory, PAGING_CONFIG)
                 .setBoundaryCallback(object : PagedList.BoundaryCallback<Submission>() {
                     override fun onZeroItemsLoaded() {
                         setState { copy(isEmpty = true) }
@@ -101,17 +101,19 @@ class HomeViewModel @AssistedInject constructor(
      * user feed.
      */
     fun refresh() {
-        pagedListDisposal.execute { copy(homeFeed = it()) }
+        setState { copy(isLoading = true) }
+        // TODO: turn the `debugMode` one and guard the immutability of the state.
+        pagedListDisposal.execute { copy(homeFeed = it(), isLoading = false) }
     }
 
 
     @AssistedInject.Factory
     interface Factory {
-        fun create(initialState: HomeViewState): HomeViewModel
+        fun create(initialState: FeedViewState): HomeViewModel
     }
 
-    companion object : MvRxViewModelFactory<HomeViewModel, HomeViewState> {
-        private val PAGIN_CONFIG = PagedList.Config.Builder()
+    companion object : MvRxViewModelFactory<HomeViewModel, FeedViewState> {
+        private val PAGING_CONFIG = PagedList.Config.Builder()
                 .setPageSize(20)
                 .setPrefetchDistance(10)
                 .setEnablePlaceholders(false)
@@ -121,7 +123,7 @@ class HomeViewModel @AssistedInject constructor(
         @JvmStatic
         override fun create(
                 viewModelContext: ViewModelContext,
-                state: HomeViewState
+                state: FeedViewState
         ): HomeViewModel? {
             val fragment = (viewModelContext as FragmentViewModelContext).fragment<HomeFeedFragment>()
             return fragment.homeViewModelFactory.create(state)

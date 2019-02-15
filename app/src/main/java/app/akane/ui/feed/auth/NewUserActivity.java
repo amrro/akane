@@ -1,4 +1,4 @@
-package app.akane;
+package app.akane.ui.feed.auth;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +15,9 @@ import net.dean.jraw.oauth.OAuthException;
 import net.dean.jraw.oauth.StatefulAuthHelper;
 
 import java.lang.ref.WeakReference;
+
+import app.akane.AkaneApp;
+import app.akane.R;
 
 /**
  * This activity is dedicated to a WebView to guide the user through the authentication process.
