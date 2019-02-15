@@ -11,10 +11,10 @@ class SubmissionsFeedController(
 ) : PagedListEpoxyController<Submission>() {
 
 
-    public interface Callback {
+    interface Callback {
         fun vote(submission: Submission, dir: VoteDirection)
-        fun save(submission: Submission, save: Boolean)
-        fun hide(submission: Submission, hide: Boolean)
+        fun save(submission: Submission)
+        fun hide(submission: Submission)
     }
 
     override fun buildItemModel(currentPosition: Int, item: Submission?): EpoxyModel<*> {

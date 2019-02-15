@@ -48,6 +48,13 @@ object Deps {
         val processorDagger2 = "com.squareup.inject:assisted-inject-processor-dagger2:$version"
     }
 
+    object Paging {
+        private const val version = "2.1.0"
+        val common = "androidx.paging:paging-common:$version"
+        val runtime = "androidx.paging:paging-runtime:$version"
+        val rxjava2 = "androidx.paging:paging-rxjava2:$version"
+    }
+
     object Coroutines {
         private const val version = "1.1.1"
         val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
@@ -65,6 +72,16 @@ object Deps {
         val paging = "com.airbnb.android:epoxy-paging:$version"
         val dataBinding = "com.airbnb.android:epoxy-databinding:$version"
         val processor = "com.airbnb.android:epoxy-processor:$version"
+    }
+
+    object Helpers {
+        private const val timberVersion = "4.7.1"
+        val timber = "com.jakewharton.timber:timber:$timberVersion"
+    }
+
+    object MvRx {
+        private const val version = "0.7.0"
+        val mvrx = "com.airbnb.android:mvrx:$version"
     }
 
 

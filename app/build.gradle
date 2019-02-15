@@ -51,10 +51,15 @@ dependencies {
     compileOnly Deps.AssistedInject.annotationDagger2
     kapt Deps.AssistedInject.processorDagger2
 
+
+    implementation Deps.Paging.runtime
+    implementation Deps.Paging.rxjava2
+
     implementation Deps.Epoxy.epoxy
     implementation Deps.Epoxy.paging
     implementation Deps.Epoxy.dataBinding
     kapt Deps.Epoxy.processor
+    implementation Deps.MvRx.mvrx
     implementation "androidx.paging:paging-runtime-ktx:2.1.0"
 
     implementation Deps.Glide.glide
@@ -62,7 +67,7 @@ dependencies {
 
     implementation 'com.jakewharton.threetenabp:threetenabp:1.1.1'
 
-
+    implementation Deps.Helpers.timber
     implementation Deps.Coroutines.core
     implementation Deps.Coroutines.android
     //

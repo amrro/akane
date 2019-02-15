@@ -6,10 +6,11 @@ import android.util.Log
 import app.akane.di.AppInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
-import net.dean.jraw.android.SharedPreferencesTokenStore
 import net.dean.jraw.android.SimpleAndroidLogAdapter
 import net.dean.jraw.http.SimpleHttpLogger
 import net.dean.jraw.oauth.AccountHelper
+import timber.log.Timber
+import timber.log.Timber.DebugTree
 import javax.inject.Inject
 
 
@@ -17,17 +18,16 @@ class AkaneApp : Application(), HasActivityInjector {
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
-
     @Inject
     lateinit var mainAccountHelper: AccountHelper
-
-    @Inject
-    lateinit var tokenStorePrefs: SharedPreferencesTokenStore
 
     override fun onCreate() {
         super.onCreate()
 
         AppInjector.init(this)
+        if (BuildConfig.DEBUG) {
+            Timber.plant(DebugTree())
+        }
 
         // Every time we use the AccountHelper to switch between accounts (from one account to
         // another, or into/out of userless mode), call this function

@@ -21,9 +21,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:cardCornerRadius="4dp"
+        app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         app:cardUseCompatPadding="true"
+        app:contentPadding="8dp"
         app:strokeColor="@color/colorAccent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -164,6 +165,7 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <ImageButton
+                    android:contentDescription="@string/upvote_content_desc"
                     android:id="@+id/upvote"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="24dp"
@@ -186,12 +188,12 @@
                     tools:text="@tools:sample/us_zipcodes" />
 
                 <ImageButton
-                    android:onClick="@{v -> callbacks.vote(submission, VoteDirection.DOWN)}"
                     android:id="@+id/downvote"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="24dp"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
+                    android:onClick="@{v -> callbacks.vote(submission, VoteDirection.DOWN)}"
                     android:src="@drawable/ic_round_arrow_downward_24px"
                     tools:layout_editor_absoluteX="118dp"
                     tools:layout_editor_absoluteY="500dp" />

@@ -22,7 +22,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Suppress("unused")
-@Module
+@Module(includes = [AppAssistedModule::class])
 abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector

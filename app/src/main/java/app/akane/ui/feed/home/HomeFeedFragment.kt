@@ -6,53 +6,43 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import androidx.paging.toLiveData
 import app.akane.databinding.FragmentSubmissionsListBinding
-import app.akane.di.Injectable
-import app.akane.repo.HomeFeedDataSource
-import app.akane.ui.feed.PageViewModel
 import app.akane.ui.feed.popular.SubmissionsFeedController
+import app.akane.util.BaseMvRxFragment
 import app.akane.util.SnackbarMessage
+import com.airbnb.mvrx.fragmentViewModel
+import com.airbnb.mvrx.withState
 import com.google.android.material.snackbar.Snackbar
 import net.dean.jraw.models.Submission
 import net.dean.jraw.models.VoteDirection
-import net.dean.jraw.oauth.AccountHelper
 import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
  *
  */
-class HomeFeedFragment : Fragment(), Injectable {
+class HomeFeedFragment : BaseMvRxFragment() {
+
+    @Inject
+    lateinit var homeViewModelFactory: HomeViewModel.Factory
 
     private lateinit var binding: FragmentSubmissionsListBinding
-    private lateinit var pageViewModel: PageViewModel
     private lateinit var controller: SubmissionsFeedController
-
-    @Inject
-    lateinit var homeViewModel: HomeViewModel
-
-
-    @Inject
-    lateinit var accountHelper: AccountHelper
-
+    private val homeViewModel: HomeViewModel by fragmentViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        pageViewModel = ViewModelProviders.of(this).get(PageViewModel::class.java)
         controller = SubmissionsFeedController(object : SubmissionsFeedController.Callback {
             override fun vote(submission: Submission, dir: VoteDirection) {
                 homeViewModel.vote(submission, dir)
             }
 
-            override fun save(submission: Submission, save: Boolean) {
-                homeViewModel.saveSubmission(submission, save)
+            override fun save(submission: Submission) {
+                homeViewModel.saveSubmission(submission)
             }
 
-            override fun hide(submission: Submission, hide: Boolean) {
-                homeViewModel.hideSubmission(submission, hide)
+            override fun hide(submission: Submission) {
+                homeViewModel.hideSubmission(submission)
             }
         })
     }
@@ -68,13 +58,16 @@ class HomeFeedFragment : Fragment(), Injectable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupSnackbar()
+    }
 
-        val ds = HomeFeedDataSource.Factory(accountHelper)
-
-        ds.toLiveData(pageSize = 20).observe(this, Observer {
-            controller.submitList(it)
-        })
-
+    override fun invalidate() {
+        withState(homeViewModel) { state ->
+            if (state.homeFeed != null) {
+                // PagingEpoxyController does not like being updated before it has a list
+                controller.submitList(state.homeFeed)
+            }
+        }
     }
 
     private fun setupSnackbar() {

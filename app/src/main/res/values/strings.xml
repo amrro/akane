@@ -5,6 +5,7 @@
 
     <string name="dot_separator">·</string>
     <string name="tab_all">All</string>
+    <string name="upvote_content_desc">Upvote Button</string>
 
 
 </resources>
