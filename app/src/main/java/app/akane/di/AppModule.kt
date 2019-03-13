@@ -1,8 +1,10 @@
 package app.akane.di
 
 import android.app.Application
+import app.akane.util.AppCoroutineDispatchers
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.Dispatchers
 import net.dean.jraw.android.AndroidHelper
 import net.dean.jraw.android.ManifestAppInfoProvider
 import net.dean.jraw.android.SharedPreferencesTokenStore
@@ -29,8 +31,8 @@ class AppModule {
     @Singleton
     @Provides
     fun providesAccountHelper(
-            app: Application,
-            tokenStore: SharedPreferencesTokenStore
+        app: Application,
+        tokenStore: SharedPreferencesTokenStore
     ): AccountHelper {
         // Get UserAgent and OAuth2 data from AndroidManifest.xml
         val provider = ManifestAppInfoProvider(app.applicationContext)
@@ -40,8 +42,18 @@ class AppModule {
         return AndroidHelper.accountHelper(provider, deviceUuid, tokenStore).apply {
             val data = TreeMap<String, PersistedAuthData>(tokenStore.data())
             val usernames = ArrayList<String>(data.keys)
-            this.switchToUser(usernames[0])
+            if (usernames.isNotEmpty()) {
+                this.switchToUser(usernames[0])
+            }
         }
     }
+
+    @Singleton
+    @Provides
+    fun provideCoroutineDispatchers() = AppCoroutineDispatchers(
+        io = Dispatchers.IO,
+        computation = Dispatchers.Default,
+        main = Dispatchers.Main
+    )
 
 }

@@ -6,12 +6,12 @@
     <data>
 
         <variable
-            name="submission"
-            type="net.dean.jraw.models.Submission" />
+            name="post"
+            type="app.akane.data.entity.Post" />
 
         <variable
             name="callbacks"
-            type="app.akane.ui.feed.popular.SubmissionsFeedController.Callback" />
+            type="app.akane.ui.feed.FeedEpoxyController.Callback" />
 
         <import type="net.dean.jraw.models.VoteDirection" />
 
@@ -24,7 +24,6 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         app:cardUseCompatPadding="true"
-        app:contentPadding="8dp"
         app:strokeColor="@color/colorAccent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,7 +32,7 @@
 
             <TextView
                 android:id="@+id/subreddit_name"
-                subreddit="@{submission.subreddit}"
+                subreddit="@{post.subreddit}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -58,7 +57,7 @@
 
             <TextView
                 android:id="@+id/username"
-                username="@{submission.author}"
+                username="@{post.author}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -85,7 +84,7 @@
 
             <TextView
                 android:id="@+id/date"
-                since="@{submission.created}"
+                since="@{post.created}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -98,12 +97,12 @@
                 android:id="@+id/title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/rubik_regular"
-                android:text="@{submission.title}"
+                android:text="@{post.title}"
                 android:textAppearance="@android:style/TextAppearance.Material.Title"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/share"
@@ -133,7 +132,7 @@
                 android:layout_marginBottom="8dp"
                 android:drawableStart="@drawable/ic_round_comment_24px"
                 android:enabled="true"
-                android:text="@{submission.commentCount + ``}"
+                android:text="@{post.commentCount + ``}"
                 app:icon="@drawable/ic_round_comment_24px"
                 app:layout_constraintBottom_toBottomOf="@+id/votes_container"
                 app:layout_constraintEnd_toStartOf="@+id/share"
@@ -165,14 +164,14 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <ImageButton
-                    android:contentDescription="@string/upvote_content_desc"
                     android:id="@+id/upvote"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:contentDescription="@string/upvote_content_desc"
                     android:layout_width="24dp"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:onClick="@{v -> callbacks.vote(submission, VoteDirection.UP)}"
-                    android:src="@drawable/ic_round_arrow_upward_24px"
+                    android:onClick="@{v -> callbacks.upVote(v, post)}"
+                    android:src="@drawable/avd_upvote_arrow"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="501dp" />
 
@@ -182,7 +181,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:enabled="false"
-                    android:text="@{submission.score + ``}"
+                    android:text="@{post.score + ``}"
                     tools:layout_editor_absoluteX="38dp"
                     tools:layout_editor_absoluteY="500dp"
                     tools:text="@tools:sample/us_zipcodes" />
@@ -193,7 +192,7 @@
                     android:layout_width="24dp"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:onClick="@{v -> callbacks.vote(submission, VoteDirection.DOWN)}"
+                    android:onClick="@{v -> callbacks.downVote(v, post)}"
                     android:src="@drawable/ic_round_arrow_downward_24px"
                     tools:layout_editor_absoluteX="118dp"
                     tools:layout_editor_absoluteY="500dp" />

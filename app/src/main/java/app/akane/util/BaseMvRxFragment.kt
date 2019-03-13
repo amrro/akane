@@ -6,7 +6,7 @@ import com.airbnb.mvrx.MvRxView
 import com.airbnb.mvrx.MvRxViewModelStore
 import dagger.android.support.DaggerFragment
 
-abstract class BaseMvRxFragment: DaggerFragment(), MvRxView, Injectable {
+abstract class BaseMvRxFragment : DaggerFragment(), MvRxView, Injectable {
 
 
     override val mvrxViewModelStore by lazy { MvRxViewModelStore(viewModelStore) }

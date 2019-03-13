@@ -1,4 +1,4 @@
-package app.akane.ui.feed.auth;
+package app.akane.ui.auth;
 
 import android.app.Activity;
 import android.content.Intent;

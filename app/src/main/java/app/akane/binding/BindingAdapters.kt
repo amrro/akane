@@ -7,10 +7,10 @@ import android.text.style.TypefaceSpan
 import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import app.akane.R
-import org.threeten.bp.Duration
-import org.threeten.bp.Instant
-import java.util.*
+import org.threeten.bp.LocalDateTime
+
+import org.threeten.bp.temporal.ChronoUnit
+
 
 /**
  * Data Binding adapters specific to the app.
@@ -25,30 +25,34 @@ object BindingAdapters {
 
     @JvmStatic
     @BindingAdapter("subreddit")
-    fun setSubredditName(textView: TextView, subredditName: String) {
-        val text = "r/$subredditName"
-        textView.text = styleText(text)
+    fun setSubredditName(textView: TextView, subredditName: String?) {
+        subredditName?.let {
+            val text = "r/$it"
+            textView.text = styleText(text)
+        }
     }
 
     @JvmStatic
     @BindingAdapter("username")
-    fun setUsername(textView: TextView, username: String) {
-        val text = "u/$username"
-        textView.text = styleText(text)
+    fun setUsername(textView: TextView, username: String?) {
+        username?.let {
+            val text = "u/$it"
+            textView.text = styleText(text)
+        }
     }
 
     @JvmStatic
     fun styleText(text: String) = SpannableStringBuilder(text).apply {
         setSpan(
-                ForegroundColorSpan(R.color.colorPrimary),
-                0, 2,
-                Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+            ForegroundColorSpan(app.akane.R.color.colorPrimary),
+            0, 2,
+            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
         )
 
         setSpan(
-                TypefaceSpan("josefin_sans.xml"),
-                0, 2,
-                Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+            TypefaceSpan("josefin_sans.xml"),
+            0, 2,
+            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
         )
     }
 
@@ -58,18 +62,48 @@ object BindingAdapters {
      */
     @JvmStatic
     @BindingAdapter("since")
-    fun since(textView: TextView, date: Date) {
-        val submissionInstant = Instant.ofEpochMilli(date.time)
-        val duration = Duration.between(submissionInstant, Instant.now())
+    fun since(textView: TextView, date: LocalDateTime?) {
+        if (date == null) return
 
-        val diff = when {
-            duration.toDays() > 0L -> "${duration.toDays()}d"
-            duration.toHours() > 0L -> "${duration.toHours()}h"
-            duration.toMinutes() > 0L -> "${duration.toMinutes()}m"
-            else -> "${duration.seconds}S"
+        val fromTemp = LocalDateTime.from(date)
+        val to = LocalDateTime.now()
+
+        val years = fromTemp.until(to, ChronoUnit.YEARS)
+        if (years > 1) {
+            textView.text = "${years}y"
+            return
         }
 
-        textView.text = diff
+        val months = fromTemp.until(to, ChronoUnit.MONTHS)
+        if (months > 1) {
+            textView.text = "${months}m"
+            return
+        }
+
+        val days = fromTemp.until(to, ChronoUnit.DAYS)
+        if (days > 1) {
+            textView.text = "${days}d"
+            return
+        }
+
+        val hours = fromTemp.until(to, ChronoUnit.HOURS)
+        if (hours > 1) {
+            textView.text = "${hours}h"
+            return
+        }
+
+        val minutes = fromTemp.until(to, ChronoUnit.MINUTES)
+
+        if (minutes > 1) {
+            textView.text = "$minutes mins"
+            return
+        }
+        val seconds = fromTemp.until(to, ChronoUnit.SECONDS)
+
+        if (seconds > 1) {
+            textView.text = "${seconds}s"
+            return
+        }
     }
 
 }

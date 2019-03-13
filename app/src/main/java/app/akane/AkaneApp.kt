@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.util.Log
 import app.akane.di.AppInjector
+import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import net.dean.jraw.android.SimpleAndroidLogAdapter
@@ -23,6 +24,8 @@ class AkaneApp : Application(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
+
+        AndroidThreeTen.init(this)
 
         AppInjector.init(this)
         if (BuildConfig.DEBUG) {

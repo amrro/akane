@@ -12,7 +12,7 @@ object Deps {
 
 
     object Google {
-        val material = "com.google.android.material:material:1.1.0-alpha02"
+        val material = "com.google.android.material:material:1.1.0-alpha04"
         val firebaseCore = "com.google.firebase:firebase-core:16.0.4"
         val crashlytics = "com.crashlytics.sdk.android:crashlytics:2.9.8"
         val gmsGoogleServices = "com.google.gms:google-services:4.2.0"
@@ -25,6 +25,7 @@ object Deps {
         val constraint = "androidx.constraintlayout:constraintlayout:1.1.3"
         val legacy = "androidx.legacy:legacy-support-v4:1.0.0"
         val viewpager = "androidx.viewpager2:viewpager2:1.0.0-alpha01"
+
     }
 
     object Glide {
@@ -62,6 +63,26 @@ object Deps {
         val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
     }
 
+    object Room {
+        private const val version = "2.1.0-alpha04"
+        val common = "androidx.room:room-common:$version"
+        val runtime = "androidx.room:room-runtime:$version"
+        val coroutine = "androidx.room:room-coroutines:$version"
+        val compiler = "androidx.room:room-compiler:$version"
+    }
+
+    object Fragment {
+        private const val version = "1.1.0-alpha03"
+        val fragment = "androidx.fragment:fragment:$version"
+        val fragmentKtx = "androidx.fragment:fragment-ktx:$version"
+    }
+
+    object Lifecycle {
+        private const val version = "2.1.0-alpha02"
+        val extension = "androidx.lifecycle:lifecycle-extensions:$version"
+        val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
+    }
+
     object API {
         val jraw = "net.dean.jraw:JRAW-Android:1.1.0"
     }
@@ -77,6 +98,11 @@ object Deps {
     object Helpers {
         private const val timberVersion = "4.7.1"
         val timber = "com.jakewharton.timber:timber:$timberVersion"
+    }
+
+    object Arrow {
+        private const val version = "0.9.1-SNAPSHOT"
+        val core = "io.arrow-kt:arrow-core-data:$version"
     }
 
     object MvRx {

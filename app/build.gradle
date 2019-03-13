@@ -33,6 +33,10 @@ android {
 }
 
 dependencies {
+
+    def room_version = "2.1.0-alpha04"
+
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation Deps.Kotlin.stdlib
     implementation Deps.AndroidX.appcompat
@@ -51,6 +55,18 @@ dependencies {
     compileOnly Deps.AssistedInject.annotationDagger2
     kapt Deps.AssistedInject.processorDagger2
 
+    implementation Deps.Lifecycle.viewmodel
+
+    implementation Deps.Room.runtime
+    implementation Deps.Room.coroutine
+    kapt Deps.Room.compiler
+
+    implementation Deps.Fragment.fragment
+    implementation Deps.Fragment.fragmentKtx
+
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
+
+    implementation Deps.Arrow.core
 
     implementation Deps.Paging.runtime
     implementation Deps.Paging.rxjava2
@@ -65,7 +81,7 @@ dependencies {
     implementation Deps.Glide.glide
     kapt Deps.Glide.compiler
 
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.1.1'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.1.2'
 
     implementation Deps.Helpers.timber
     implementation Deps.Coroutines.core

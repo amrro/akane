@@ -1,12 +1,9 @@
 package app.akane.ui.feed
 
 import android.content.Context
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import app.akane.R
-import app.akane.ui.feed.home.HomeFeedFragment
-import app.akane.ui.feed.popular.PopularFeedFragment
 
 private val TAB_TITLES = arrayOf(
         R.string.tab_home,
@@ -17,19 +14,12 @@ private val TAB_TITLES = arrayOf(
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-class SectionsPagerAdapter(private val context: Context, fm: FragmentManager)
+class HomePagerAdapter(private val context: Context, fm: FragmentManager)
     : FragmentPagerAdapter(fm) {
 
-    override fun getItem(position: Int): Fragment? {
-        // getItem is called to instantiate the fragment for the given page.
-        // Return a PopularFeedFragment (defined as a static inner class below).
-//        return PopularFeedFragment.newInstance(position + 1)
-
-        return when (position) {
-            0 -> HomeFeedFragment()
-            1 -> PopularFeedFragment()
-            else -> null
-        }
+    override fun getItem(position: Int) = when (position) {
+        0 -> FeedListFragment.newInstance("frontpage")
+        else -> FeedListFragment.newInstance("popular")
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
