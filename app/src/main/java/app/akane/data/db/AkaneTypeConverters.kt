@@ -1,8 +1,10 @@
 package app.akane.data.db
 
 import androidx.room.TypeConverter
+import app.akane.data.entity.ImagePreview
 import net.dean.jraw.models.CommentSort
 import net.dean.jraw.models.DistinguishedStatus
+import net.dean.jraw.models.VoteDirection
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
 
@@ -19,7 +21,7 @@ object AkaneTypeConverters {
 
     @TypeConverter
     @JvmStatic
-    fun fromCommentSort(commentSort: CommentSort?) = commentSort?.let { it.toString() }
+    fun fromCommentSort(commentSort: CommentSort?) = commentSort?.toString()
 
     @TypeConverter
     @JvmStatic
@@ -37,4 +39,22 @@ object AkaneTypeConverters {
         return DistinguishedStatus.valueOf(status)
     }
 
+
+    // net.dean.jraw.models.VoteDirection
+    @TypeConverter
+    @JvmStatic
+    fun toVoteDirection(vote: String) = VoteDirection.valueOf(vote)
+
+    @TypeConverter
+    @JvmStatic
+    fun fromVoteDirection(vote: VoteDirection) = vote.toString()
+
+
+    @TypeConverter
+    @JvmStatic
+    fun toImageType(type: String) = ImagePreview.ImageType.valueOf(type)
+
+    @TypeConverter
+    @JvmStatic
+    fun fromImageType(type: ImagePreview.ImageType) = type.toString()
 }

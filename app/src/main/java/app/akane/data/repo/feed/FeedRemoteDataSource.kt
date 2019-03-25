@@ -1,12 +1,7 @@
 package app.akane.data.repo.feed
 
-import app.akane.data.entity.Post
 import app.akane.data.mapper.SubmissionToPost
-import app.akane.util.AppCoroutineDispatchers
-import arrow.core.Try
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
+import app.akane.util.buildRequest
 import net.dean.jraw.models.Submission
 import net.dean.jraw.models.SubredditSort
 import net.dean.jraw.models.TimePeriod
@@ -16,16 +11,14 @@ import javax.inject.Inject
 
 class FeedRemoteDataSource @Inject constructor(
     private val accountHelper: AccountHelper,
-    private val mapper: SubmissionToPost,
-    private val dispatchers: AppCoroutineDispatchers
+    private val mapper: SubmissionToPost
 ) {
 
     private lateinit var pagination: DefaultPaginator<Submission>
 
-
     fun updateConfigs(
         subredditName: String,
-        sorting: SubredditSort = SubredditSort.HOT,
+        sorting: SubredditSort,
         timePeriod: TimePeriod? = null
     ) {
         // first guide mapper to use this in its map
@@ -52,12 +45,12 @@ class FeedRemoteDataSource @Inject constructor(
         pagination.restart()
     }
 
-    fun nextPage(): Deferred<Try<List<Post>>> = GlobalScope.async(dispatchers.io) {
+    suspend fun nextPage() = buildRequest {
         require(::pagination.isInitialized) {
             "FeedRemoteDataSource.nextPage(): Pagination is not initialized. call FeedRemoteDataSource#updateConfigs() first."
         }
 
-        Try { mapper(pagination.next().children) }
+        mapper(pagination.next().children)
     }
 
 

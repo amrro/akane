@@ -1,0 +1,374 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "05f67e145818754bd8d1c4dc3c1e6b47",
+    "entities": [
+      {
+        "tableName": "post_info",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`index` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id` TEXT NOT NULL, `isArchived` INTEGER NOT NULL, `author` TEXT NOT NULL, `vote` TEXT NOT NULL, `author_flair_text` TEXT, `body` TEXT, `num_comments` INTEGER NOT NULL, `contest_mode` INTEGER NOT NULL, `created` TEXT, `distinguished` TEXT NOT NULL, `domain` TEXT NOT NULL, `edited` TEXT, `fullName` TEXT NOT NULL, `can_gild` INTEGER NOT NULL, `gilded` INTEGER NOT NULL, `isHidden` INTEGER NOT NULL, `link_flair_text` TEXT, `locked` INTEGER NOT NULL, `over_18` INTEGER NOT NULL, `permalink` TEXT NOT NULL, `post_hint` TEXT, `isQuarantine` INTEGER NOT NULL, `isRemoved` INTEGER NOT NULL, `num_reports` INTEGER NOT NULL, `isSaved` INTEGER NOT NULL, `score` INTEGER NOT NULL, `hide_score` INTEGER NOT NULL, `is_self` INTEGER NOT NULL, `selftext` TEXT NOT NULL, `isSpam` INTEGER NOT NULL, `isSpoiler` INTEGER NOT NULL, `stickied` INTEGER NOT NULL, `subreddit` TEXT NOT NULL, `subreddit_full_name` TEXT NOT NULL, `suggested_sort` TEXT NOT NULL, `thumbnail` TEXT, `title` TEXT NOT NULL, `url` TEXT NOT NULL, `isVisited` INTEGER NOT NULL, `listing` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "index",
+            "columnName": "index",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isArchived",
+            "columnName": "isArchived",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "author",
+            "columnName": "author",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "vote",
+            "columnName": "vote",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "authorFlairText",
+            "columnName": "author_flair_text",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "body",
+            "columnName": "body",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "commentCount",
+            "columnName": "num_comments",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isContestMode",
+            "columnName": "contest_mode",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "created",
+            "columnName": "created",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "distinguished",
+            "columnName": "distinguished",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "domain",
+            "columnName": "domain",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "edited",
+            "columnName": "edited",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fullName",
+            "columnName": "fullName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isGildable",
+            "columnName": "can_gild",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gilded",
+            "columnName": "gilded",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isHidden",
+            "columnName": "isHidden",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "linkFlairText",
+            "columnName": "link_flair_text",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "locked",
+            "columnName": "locked",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isNsfw",
+            "columnName": "over_18",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "permalink",
+            "columnName": "permalink",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "postHint",
+            "columnName": "post_hint",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isQuarantine",
+            "columnName": "isQuarantine",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isRemoved",
+            "columnName": "isRemoved",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "reports",
+            "columnName": "num_reports",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isSaved",
+            "columnName": "isSaved",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "score",
+            "columnName": "score",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isScoreHidden",
+            "columnName": "hide_score",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isSelfPost",
+            "columnName": "is_self",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "selfText",
+            "columnName": "selftext",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isSpam",
+            "columnName": "isSpam",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isSpoiler",
+            "columnName": "isSpoiler",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "stickied",
+            "columnName": "stickied",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "subreddit",
+            "columnName": "subreddit",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "subredditFullName",
+            "columnName": "subreddit_full_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "suggestedSort",
+            "columnName": "suggested_sort",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "thumbnail",
+            "columnName": "thumbnail",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "url",
+            "columnName": "url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isVisited",
+            "columnName": "isVisited",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "listing",
+            "columnName": "listing",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "index"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_post_info_id",
+            "unique": true,
+            "columnNames": [
+              "id"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_post_info_id` ON `${TABLE_NAME}` (`id`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "image_preview",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`index` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id` TEXT NOT NULL, `post_id` TEXT NOT NULL, `enabled` INTEGER NOT NULL, `width` INTEGER NOT NULL, `height` INTEGER NOT NULL, `link` TEXT NOT NULL, `type` TEXT NOT NULL, FOREIGN KEY(`post_id`) REFERENCES `post_info`(`id`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "index",
+            "columnName": "index",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "postId",
+            "columnName": "post_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "enabled",
+            "columnName": "enabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "width",
+            "columnName": "width",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "height",
+            "columnName": "height",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "link",
+            "columnName": "link",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "index"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_image_preview_index",
+            "unique": true,
+            "columnNames": [
+              "index"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_image_preview_index` ON `${TABLE_NAME}` (`index`)"
+          },
+          {
+            "name": "index_image_preview_post_id",
+            "unique": false,
+            "columnNames": [
+              "post_id"
+            ],
+            "createSql": "CREATE  INDEX `index_image_preview_post_id` ON `${TABLE_NAME}` (`post_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "post_info",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "post_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"05f67e145818754bd8d1c4dc3c1e6b47\")"
+    ]
+  }
+}

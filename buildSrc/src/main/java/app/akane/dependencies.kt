@@ -21,7 +21,7 @@ object Deps {
 
     object AndroidX {
         val appcompat = "androidx.appcompat:appcompat:1.0.2"
-        val corekts = "androidx.core:core-ktx:1.0.1"
+        val corekts = "androidx.core:core-ktx:1.1.0-alpha05"
         val constraint = "androidx.constraintlayout:constraintlayout:1.1.3"
         val legacy = "androidx.legacy:legacy-support-v4:1.0.0"
         val viewpager = "androidx.viewpager2:viewpager2:1.0.0-alpha01"
@@ -44,7 +44,7 @@ object Deps {
     }
 
     object AssistedInject {
-        private const val version = "0.3.2"
+        private const val version = "0.3.3"
         val annotationDagger2 = "com.squareup.inject:assisted-inject-annotations-dagger2:$version"
         val processorDagger2 = "com.squareup.inject:assisted-inject-processor-dagger2:$version"
     }
@@ -72,13 +72,13 @@ object Deps {
     }
 
     object Fragment {
-        private const val version = "1.1.0-alpha03"
+        private const val version = "1.1.0-alpha05"
         val fragment = "androidx.fragment:fragment:$version"
         val fragmentKtx = "androidx.fragment:fragment-ktx:$version"
     }
 
     object Lifecycle {
-        private const val version = "2.1.0-alpha02"
+        private const val version = "2.1.0-alpha03"
         val extension = "androidx.lifecycle:lifecycle-extensions:$version"
         val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
     }

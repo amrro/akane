@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
 import androidx.paging.toLiveData
 import app.akane.data.entity.Post
-
 import net.dean.jraw.models.SubredditSort
 import net.dean.jraw.models.TimePeriod
 import javax.inject.Inject
@@ -25,7 +24,6 @@ class FeedRepository @Inject constructor(
         )
     }
 
-
     suspend fun refresh() {
         return updateFrontPage(true)
     }
@@ -36,7 +34,7 @@ class FeedRepository @Inject constructor(
 
     fun updateConfigs(
         name: String,
-        sort: SubredditSort = SubredditSort.HOT,
+        sort: SubredditSort,
         timePeriod: TimePeriod? = null
     ) {
         this.subreddit = name
@@ -49,11 +47,8 @@ class FeedRepository @Inject constructor(
             frontPageRemote.restart()
         }
 
-        frontPageRemote.nextPage().await().also { result ->
-            result.fold(
-                { throw it },
-                { frontPageLocal.insertAll(it, reset) }
-            )
+        frontPageRemote.nextPage().also { result ->
+            frontPageLocal.insertAll(result, reset)
         }
     }
 
