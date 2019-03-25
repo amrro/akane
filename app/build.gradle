@@ -11,7 +11,7 @@ if (file("google-services.json").exists()) {
 }
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 'android-Q'
     defaultConfig {
         applicationId "app.akane"
         minSdkVersion 21
@@ -19,6 +19,13 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas".toString())
+            }
+        }
+
     }
     buildTypes {
         release {
@@ -33,11 +40,6 @@ android {
 }
 
 dependencies {
-
-    def room_version = "2.1.0-alpha04"
-
-
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation Deps.Kotlin.stdlib
     implementation Deps.AndroidX.appcompat
     implementation Deps.AndroidX.corekts
@@ -49,6 +51,8 @@ dependencies {
     implementation Deps.Dagger.androidSupport
     implementation Deps.AndroidX.legacy
 //    implementation Deps.AndroidX.viewpager
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
     kapt Deps.Dagger.compiler
     kapt Deps.Dagger.androidProcessor
 
@@ -66,7 +70,16 @@ dependencies {
 
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 
-    implementation Deps.Arrow.core
+    // Fresco
+    implementation 'com.facebook.fresco:fresco:1.13.0'
+    // For animated GIF support
+    implementation 'com.facebook.fresco:animated-gif:1.13.0'
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
+    // Optional, if you use support library fragments:
+    debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3'
+
 
     implementation Deps.Paging.runtime
     implementation Deps.Paging.rxjava2
@@ -90,4 +103,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation 'com.google.android.material:material:1.0.0'
 }

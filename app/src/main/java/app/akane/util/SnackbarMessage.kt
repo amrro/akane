@@ -2,9 +2,10 @@ package app.akane.util
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
+import javax.inject.Inject
 
 
-class SnackbarMessage : SingleLiveEvent<String>() {
+class SnackbarMessage @Inject constructor() : SingleLiveEvent<String>() {
     fun observe(owner: LifecycleOwner, observer: SnackbarObserver) {
         super.observe(owner, object : Observer<String> {
             override fun onChanged(t: String?) {

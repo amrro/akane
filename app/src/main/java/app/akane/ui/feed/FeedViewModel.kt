@@ -14,27 +14,33 @@ import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import net.dean.jraw.ApiException
+import kotlinx.coroutines.plus
 import net.dean.jraw.models.SubredditSort
 import net.dean.jraw.models.TimePeriod
-import net.dean.jraw.models.VoteDirection
-import net.dean.jraw.oauth.AccountHelper
 import timber.log.Timber
 
 class FeedViewModel @AssistedInject constructor(
     @Assisted val initialState: FeedViewState,
-    val accountHelper: AccountHelper,
     val repository: FeedRepository,
     val dispatchers: AppCoroutineDispatchers
 ) : BaseMvRxViewModel<FeedViewState>(initialState, debugMode = false) {
 
-    private val reddit = if (accountHelper.isAuthenticated()) accountHelper.reddit else null
     val snackbarMessage = SnackbarMessage()
 
+    private val supervisor = SupervisorJob()
+    private val exceptionHandler =
+        CoroutineExceptionHandler { _, cause ->
+            onError(cause)
+        }
+
+    private val scope = viewModelScope + supervisor + exceptionHandler
+
+
     internal fun setConfigs(
-        name: String?,
+        name: String,
         sort: SubredditSort = SubredditSort.HOT,
         timePeriod: TimePeriod? = null
     ) {
@@ -43,13 +49,17 @@ class FeedViewModel @AssistedInject constructor(
             sort,
             timePeriod
         )
+
+        // TODO: Move this line from here.
         setState { copy(feed = pagedList()) }
         refresh()
     }
 
+
     private fun pagedList(): LiveData<PagedList<Post>> {
         return repository.observeForPaging(
             object : PagedList.BoundaryCallback<Post>() {
+
                 override fun onItemAtEndLoaded(itemAtEnd: Post) {
                     viewModelScope.launch(dispatchers.io) {
                         repository.loadMore()
@@ -58,69 +68,42 @@ class FeedViewModel @AssistedInject constructor(
             })
     }
 
-    fun vote(post: Post, dir: VoteDirection) = viewModelScope.launch(dispatchers.io) {
-        try {
-            if (reddit != null) {
-                val subRef = reddit.submission(post.id)
-                subRef.setVote(
-                    if (subRef.inspect().vote == dir) VoteDirection.NONE
-                    else dir
-                )
-            }
-        } catch (e: ApiException) {
-            runOnMain {
-                snackbarMessage.value = e.explanation
-                Timber.e(e)
-            }
-        }
-    }
-
-
-    fun hideSubmission(post: Post) = viewModelScope.launch(dispatchers.io) {
-        if (reddit != null) {
-            try {
-                val subRef = reddit.submission(post.id)
-                subRef.setHidden(!subRef.inspect().isHidden)
-            } catch (e: ApiException) {
-                runOnMain {
-                    snackbarMessage.value = e.explanation
-                    Timber.e(e)
-                }
-            }
-        }
-    }
-
-
-    fun saveSubmission(post: Post) = viewModelScope.launch(dispatchers.io) {
-        if (reddit != null) {
-            try {
-                val submissionReference = reddit.submission(post.id)
-                submissionReference.setSaved(!submissionReference.inspect().isSaved)
-            } catch (e: ApiException) {
-                runOnMain {
-                    snackbarMessage.value = e.explanation
-                    Timber.e(e)
-                }
-            }
-        }
-    }
-
 
     /**
      * This method is responsible for firing or refreshing the list to get
      * user feed.
      */
     fun refresh() {
-        viewModelScope.launch(dispatchers.io) {
-            setState { copy(isLoading = true) }
-            repository.refresh()
-            setState { copy(isLoading = false) }
+        setState { copy(isLoading = true) }
+        safeRequest { repository.refresh() }
+        setState { copy(isLoading = false) }
+    }
+
+
+    private fun onError(cause: Throwable) {
+        runOnMain {
+            //            if (cause is UnknownHostException) {
+//                snackbarMessage.value = "Please Check Your connection!"
+//            } else {
+//                snackbarMessage.value = cause.message
+//            }
+
+            snackbarMessage.value = cause.message
+            Timber.e(cause)
         }
     }
 
-    private suspend fun <T> runOnMain(action: () -> T): T {
-        return withContext(dispatchers.main) {
-            return@withContext action()
+    private fun runOnMain(action: () -> Unit) {
+        viewModelScope.launch(dispatchers.main) {
+            action()
+        }
+    }
+
+    private fun safeRequest(block: suspend () -> Unit) {
+        try {
+            scope.launch(dispatchers.io) { block() }
+        } catch (ex: Exception) {
+            onError(ex)
         }
     }
 

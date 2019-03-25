@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_save_post"
+        android:title="Save"
+        android:icon="@drawable/ic_round_bookmarked_24px" />
+    <item
+        android:id="@+id/action_hide_post"
+        android:title="Hide Post"
+        android:icon="@drawable/ic_hide_24px" />
+    <item
+        android:id="@+id/action_open_in_browser"
+        android:title="Open In Browser"
+        android:icon="@drawable/ic_chrome_browser" />
+    <item
+        android:id="@+id/action_copy_link"
+        android:title="Copy Link" />
+    <item
+        android:id="@+id/action_block_user"
+        android:title="Block User"
+        android:icon="@drawable/ic_round_block_24px" />
+</menu>

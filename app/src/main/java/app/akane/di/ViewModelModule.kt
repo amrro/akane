@@ -2,7 +2,7 @@ package app.akane.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import app.akane.ui.feed.FeedViewModel
+import app.akane.ui.feed.ActionsViewModel
 import app.akane.util.AxiomViewModelFactory
 import dagger.Binds
 import dagger.Module
@@ -12,10 +12,15 @@ import dagger.multibindings.IntoMap
 @Module
 abstract class ViewModelModule {
 
+//    @Binds
+//    @IntoMap
+//    @ViewModelKey(FeedViewModel::class)
+//    abstract fun bindFeedViewModel(feedViewModel: FeedViewModel): ViewModel
+
     @Binds
     @IntoMap
-    @ViewModelKey(FeedViewModel::class)
-    abstract fun bindHomeViewModel(userViewModel: FeedViewModel): ViewModel
+    @ViewModelKey(ActionsViewModel::class)
+    abstract fun bindActionsViewModel(actionsViewModel: ActionsViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: AxiomViewModelFactory): ViewModelProvider.Factory
