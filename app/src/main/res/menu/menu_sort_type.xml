@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_feed_sort_best"
+        android:title="Best" />
+    <item
+        android:id="@+id/action_feed_sort_hot"
+        android:title="Hot" />
+    <item
+        android:id="@+id/action_feed_sort_new"
+        android:title="New" />
+    <item
+        android:id="@+id/action_feed_sort_top"
+        android:title="Top">
+
+        <menu>
+
+            <item
+                android:id="@+id/action_feed_sort_top_hour"
+                android:title="Past Hour"
+                android:checkable="false" />
+            <item
+                android:id="@+id/action_feed_sort_top_24_hour"
+                android:title="Past 24 Hours" />
+            <item
+                android:id="@+id/action_feed_sort_top_week"
+                android:title="Past Week" />
+            <item
+                android:id="@+id/action_feed_sort_top_month"
+                android:title="Past Month" />
+            <item
+                android:id="@+id/action_feed_sort_top_year"
+                android:title="Past Year" />
+            <item
+                android:id="@+id/action_feed_sort_top_all_time"
+                android:title="All Time" />
+        </menu>
+
+    </item>
+
+    <item
+        android:id="@+id/action_feed_sort_controversial"
+        android:title="Controversial">
+        <menu>
+
+            <item
+                android:id="@+id/action_feed_sort_controversial_hour"
+                android:title="Past Hour"
+                android:checkable="false" />
+            <item
+                android:id="@+id/action_feed_sort_controversial_24_hour"
+                android:title="Past 24 Hours" />
+            <item
+                android:id="@+id/action_feed_sort_controversial_week"
+                android:title="Past Week" />
+            <item
+                android:id="@+id/action_feed_sort_controversial_month"
+                android:title="Past Month" />
+            <item
+                android:id="@+id/action_feed_sort_controversial_year"
+                android:title="Past Year" />
+            <item
+                android:id="@+id/action_feed_sort_controversial_all_time"
+                android:title="All Time" />
+        </menu>
+    </item>
+</menu>

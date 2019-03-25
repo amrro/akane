@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="post"
+            type="app.akane.data.entity.Post" />
+
+        <variable
+            name="callbacks"
+            type="app.akane.ui.feed.FeedEpoxyController.Callback" />
+
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottom_actions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/comments_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="4dp"
+            android:gravity="center"
+            prettyNumber="@{post.postInfo.commentCount}"
+            android:drawableStart="@drawable/ic_round_mode_comment_24px"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/share"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/votes_container"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@tools:sample/us_zipcodes" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/votes_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/comments_number"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/comments_number">
+
+            <ImageButton
+                android:id="@+id/upvote"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                vote="@{post.postInfo.vote}"
+                android:contentDescription="@string/upvote_content_desc"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:tag="upvote"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:onClick="@{v -> callbacks.upvote(v, post)}"
+                android:src="@drawable/sld_upvote_arrow"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/votes_number"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                prettyNumber="@{post.postInfo.score}"
+                android:ems="4"
+                app:layout_constraintBottom_toBottomOf="@+id/upvote"
+                app:layout_constraintEnd_toStartOf="@+id/downvote"
+                app:layout_constraintStart_toEndOf="@+id/upvote"
+                app:layout_constraintTop_toTopOf="@+id/upvote"
+                tools:text="@tools:sample/us_zipcodes" />
+
+            <ImageButton
+                android:id="@+id/downvote"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                vote="@{post.postInfo.vote}"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:tag="downvote"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:onClick="@{v -> callbacks.downvote(post)}"
+                android:src="@drawable/sld_downvote_arrow"
+                app:layout_constraintBottom_toBottomOf="@+id/votes_number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/votes_number"
+                app:layout_constraintTop_toTopOf="@+id/votes_number" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageButton
+            android:id="@+id/share"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_round_share_24px"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/comments_number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/comments_number" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

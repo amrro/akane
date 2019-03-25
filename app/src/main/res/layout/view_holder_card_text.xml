@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -42,16 +43,34 @@
                 app:callbacks="@{callbacks}"
                 app:post="@{post}" />
 
+
+            <TextView
+                android:id="@+id/image"
+                android:text="@{post.postInfo.selfText}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:maxLines="3"
+                android:ellipsize="end"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/header_view"
+                tools:text="@string/sample_long_text" />
+
+
             <include
                 android:id="@+id/actions_view"
                 layout="@layout/card_post_bottom_actions"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
                 app:callbacks="@{callbacks}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/header_view"
+                app:layout_constraintTop_toBottomOf="@+id/image"
                 app:post="@{post}" />
 
 

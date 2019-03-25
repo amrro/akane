@@ -1,84 +1,209 @@
 package app.akane.ui.feed
 
 
-import android.graphics.drawable.Animatable
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import androidx.fragment.app.Fragment
+import android.widget.PopupMenu
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import app.akane.R
 import app.akane.data.entity.Post
 import app.akane.databinding.FragmentSubmissionsListBinding
 import app.akane.util.BaseMvRxFragment
 import app.akane.util.SnackbarMessage
+import app.akane.util.checker
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import net.dean.jraw.models.SubredditSort
-import net.dean.jraw.models.VoteDirection
+import net.dean.jraw.models.TimePeriod
 import javax.inject.Inject
 
-/**
- * A simple [Fragment] subclass.
- *
- */
 class FeedListFragment : BaseMvRxFragment() {
 
     @Inject
     lateinit var feedViewModelFactory: FeedViewModel.Factory
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
     private lateinit var binding: FragmentSubmissionsListBinding
     private lateinit var controller: FeedEpoxyController
     private val feedViewModel: FeedViewModel by fragmentViewModel()
+    private lateinit var actionsViewModel: ActionsViewModel
+
+    private val subredditName: String by lazy {
+        val name = arguments?.getString(KEY_SUBREDDIT_NAME)
+        checker(!name.isNullOrEmpty()) {
+            "subreddit's name shouldn't be null!"
+        }
+        name!!
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         controller =
             FeedEpoxyController(object : FeedEpoxyController.Callback {
-                override fun upVote(view: View, post: Post) {
-                    feedViewModel.vote(post, VoteDirection.UP)
-                    (view as ImageButton).drawable.let {
-                        if (it is Animatable) {
-                            it.start()
-                        }
-                    }
+                override fun upvote(view: View, post: Post) {
+                    actionsViewModel.upvote(post.postInfo.id)
                 }
 
-                override fun downVote(view: View, post: Post) {
-                    feedViewModel.vote(post, VoteDirection.DOWN)
+                override fun downvote(post: Post) {
+                    actionsViewModel.downvote(post.postInfo.id)
                 }
 
 
                 override fun save(post: Post) {
-                    feedViewModel.saveSubmission(post)
+                    actionsViewModel.save(post.postInfo.id)
                 }
 
                 override fun hide(post: Post) {
-                    feedViewModel.hideSubmission(post)
+                    actionsViewModel.hide(post.postInfo.id)
                 }
-            })
+
+                override fun moreOptions(view: View) {
+                    val moreOptionsPopMenu = PopupMenu(context, view)
+                    moreOptionsPopMenu.menuInflater.inflate(
+                        R.menu.menu_card_more_options,
+                        moreOptionsPopMenu.menu
+                    )
+                    moreOptionsPopMenu.show()
+                }
+            },
+                feedbackOptions = object : FeedEpoxyController.FeedOptionsCallback {
+                    override fun onSortOptionClicked(view: View) {
+                        showFeedOptions(view as MaterialButton)
+                    }
+
+                    override fun onTimePeriodClicked(view: View) {
+
+                    }
+                })
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSubmissionsListBinding.inflate(inflater, container, false)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_submissions_list,
+            container,
+            false
+        )
         binding.feedRecyclerview.setController(controller)
         return binding.root
     }
 
+    fun showFeedOptions(button: MaterialButton) {
+        PopupMenu(context, button, Gravity.BOTTOM).apply {
+            this.menuInflater.inflate(
+                R.menu.menu_sort_type,
+                this.menu
+            )
+            this.setOnMenuItemClickListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.action_feed_sort_best -> {
+                        onFeedConfigurationChanged(SubredditSort.BEST)
+                        button.text = "Best"
+                    }
+                    R.id.action_feed_sort_hot -> {
+                        onFeedConfigurationChanged(SubredditSort.HOT)
+                        button.text = "Hot"
+                    }
+                    R.id.action_feed_sort_new -> {
+                        onFeedConfigurationChanged(SubredditSort.NEW)
+                        button.text = "New"
+                    }
+                    R.id.action_feed_sort_top_hour -> {
+                        onFeedConfigurationChanged(SubredditSort.TOP, TimePeriod.HOUR)
+                        button.text = "Top (hour)"
+                    }
+                    R.id.action_feed_sort_top_24_hour -> {
+                        onFeedConfigurationChanged(SubredditSort.TOP, TimePeriod.DAY)
+                        button.text = "Top (24 Hour)"
+                    }
+                    R.id.action_feed_sort_top_week -> {
+                        onFeedConfigurationChanged(SubredditSort.TOP, TimePeriod.WEEK)
+                        button.text = "Top (Week)"
+                    }
+                    R.id.action_feed_sort_top_month -> {
+                        onFeedConfigurationChanged(SubredditSort.TOP, TimePeriod.MONTH)
+                        button.text = "Top (Month)"
+                    }
+                    R.id.action_feed_sort_top_year -> {
+                        onFeedConfigurationChanged(SubredditSort.TOP, TimePeriod.YEAR)
+                        button.text = "Top (Year)"
+                    }
+                    R.id.action_feed_sort_top_all_time -> {
+                        onFeedConfigurationChanged(SubredditSort.TOP, TimePeriod.ALL)
+                        button.text = "Top (All Time)"
+                    }
+
+
+                    R.id.action_feed_sort_controversial_hour -> {
+                        onFeedConfigurationChanged(SubredditSort.CONTROVERSIAL, TimePeriod.HOUR)
+                        button.text = "Controversial (hour)"
+                    }
+                    R.id.action_feed_sort_controversial_24_hour -> {
+                        onFeedConfigurationChanged(SubredditSort.CONTROVERSIAL, TimePeriod.DAY)
+                        button.text = "Controversial (24 Hour)"
+                    }
+                    R.id.action_feed_sort_controversial_week -> {
+                        onFeedConfigurationChanged(SubredditSort.CONTROVERSIAL, TimePeriod.WEEK)
+                        button.text = "Controversial (Week)"
+                    }
+                    R.id.action_feed_sort_controversial_month -> {
+                        onFeedConfigurationChanged(SubredditSort.CONTROVERSIAL, TimePeriod.MONTH)
+                        button.text = "Controversial (Month)"
+                    }
+                    R.id.action_feed_sort_controversial_year -> {
+                        onFeedConfigurationChanged(SubredditSort.CONTROVERSIAL, TimePeriod.YEAR)
+                        button.text = "Controversial (Year)"
+                    }
+                    R.id.action_feed_sort_controversial_all_time -> {
+                        onFeedConfigurationChanged(SubredditSort.CONTROVERSIAL, TimePeriod.ALL)
+                        button.text = "Controversial (All Time)"
+                    }
+
+                    else -> false
+                }
+
+                true
+            }
+
+            this.show()
+        }
+
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        feedViewModel.setConfigs(
-            name = arguments?.getString(KEY_SUBREDDIT_NAME),
-            sort = SubredditSort.BEST
-        )
+        actionsViewModel = ViewModelProviders.of(this, viewModelFactory)
+            .get(ActionsViewModel::class.java)
+
+        onFeedConfigurationChanged()
         setupSnackbar()
         binding.feedSwipeRefresh.setOnRefreshListener(feedViewModel::refresh)
     }
+
+    private fun onFeedConfigurationChanged(
+        sort: SubredditSort = SubredditSort.HOT,
+        timePeriod: TimePeriod? = null
+    ) {
+        feedViewModel.setConfigs(
+            name = subredditName,
+            sort = sort,
+            timePeriod = timePeriod
+        )
+    }
+
 
     override fun invalidate() {
         withState(feedViewModel) { state ->
@@ -88,20 +213,22 @@ class FeedListFragment : BaseMvRxFragment() {
         }
     }
 
-    private fun setupSnackbar() {
-        feedViewModel.snackbarMessage.observe(this, object : SnackbarMessage.SnackbarObserver {
-            override fun onNewMessage(snackbarMessageResourceId: String) {
-                view?.let {
-                    Snackbar.make(it, snackbarMessageResourceId, Snackbar.LENGTH_LONG)
-                        .show()
-                }
+    private val messageObserver = object : SnackbarMessage.SnackbarObserver {
+        override fun onNewMessage(snackbarMessageResourceId: String) {
+            view?.let {
+                Snackbar.make(it, snackbarMessageResourceId, Snackbar.LENGTH_LONG)
+                    .show()
             }
-        })
+        }
+    }
+
+    private fun setupSnackbar() {
+        feedViewModel.snackbarMessage.observe(this, messageObserver)
+        actionsViewModel.snackbarMessage.observe(this, messageObserver)
     }
 
 
     companion object {
-
         private const val KEY_SUBREDDIT_NAME = "key-subreddit-name"
 
         fun newInstance(subredditName: String): FeedListFragment {

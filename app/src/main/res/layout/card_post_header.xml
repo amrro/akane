@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="post"
+            type="app.akane.data.entity.Post" />
+
+        <variable
+            name="callbacks"
+            type="app.akane.ui.feed.FeedEpoxyController.Callback" />
+
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/card_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/subreddit_name"
+            subreddit="@{post.postInfo.subreddit}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintBottom_toBottomOf="@+id/in_placeholder"
+            app:layout_constraintStart_toEndOf="@+id/in_placeholder"
+            app:layout_constraintTop_toTopOf="@+id/in_placeholder"
+            tools:text="r/gifs" />
+
+        <TextView
+            android:id="@+id/in_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/josefin_sans"
+            android:text="to"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/username"
+            app:layout_constraintStart_toEndOf="@+id/username"
+            app:layout_constraintTop_toTopOf="@+id/username" />
+
+        <TextView
+            android:id="@+id/username"
+            username="@{post.postInfo.author}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/rubik_regular"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="u/SuddenDapper" />
+
+        <TextView
+            android:id="@+id/date"
+            since="@{post.postInfo.created}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/subreddit_name"
+            app:layout_constraintStart_toEndOf="@+id/subreddit_name"
+            app:layout_constraintTop_toTopOf="@+id/subreddit_name"
+            tools:text="4h" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/rubik_regular"
+            android:text="@{post.postInfo.title}"
+            android:textAppearance="@android:style/TextAppearance.Material.Title"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/username"
+            tools:text="Are we alone in the whole universe?" />
+
+        <ImageButton
+            android:onClick="@{v -> callbacks.moreOptions(v)}"
+            android:id="@+id/options"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/date"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/sld_upvote_arrow" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

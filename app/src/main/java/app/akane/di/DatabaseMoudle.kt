@@ -29,4 +29,7 @@ class DatabaseMoudle {
     @Provides
     fun providePostDao(db: AkaneDataBase) = db.postDao()
 
+    @Provides
+    fun provideImagePreviewDao(db: AkaneDataBase) = db.imagePreviewDao()
+
 }

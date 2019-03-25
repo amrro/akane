@@ -1,11 +1,11 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Akane for Reddit</string>
     <string name="tab_home">Home</string>
     <string name="tab_popular">Popular</string>
 
     <string name="dot_separator">·</string>
-    <string name="tab_all">All</string>
     <string name="upvote_content_desc">Upvote Button</string>
+    <string name="sample_long_text" tools:keep="@string/sample_long_text">Material is an adaptable system of guidelines, components, and tools that support the best practices of user interface design. Backed by open-source code, Material streamlines collaboration between designers and developers, and helps teams quickly build beautiful products.</string>
 
 
 </resources>

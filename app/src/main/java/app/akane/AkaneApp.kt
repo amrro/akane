@@ -4,7 +4,9 @@ import android.app.Activity
 import android.app.Application
 import android.util.Log
 import app.akane.di.AppInjector
+import com.facebook.drawee.backends.pipeline.Fresco
 import com.jakewharton.threetenabp.AndroidThreeTen
+import com.squareup.leakcanary.LeakCanary
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import net.dean.jraw.android.SimpleAndroidLogAdapter
@@ -26,11 +28,20 @@ class AkaneApp : Application(), HasActivityInjector {
         super.onCreate()
 
         AndroidThreeTen.init(this)
-
+        Fresco.initialize(this)
         AppInjector.init(this)
         if (BuildConfig.DEBUG) {
             Timber.plant(DebugTree())
         }
+
+        super.onCreate()
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return
+        }
+        LeakCanary.install(this)
+
 
         // Every time we use the AccountHelper to switch between accounts (from one account to
         // another, or into/out of userless mode), call this function
