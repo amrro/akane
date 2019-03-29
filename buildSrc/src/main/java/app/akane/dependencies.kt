@@ -2,6 +2,10 @@ package app.akane
 
 object Deps {
 
+    object Versions {
+        val ktlint = "0.29.0"
+    }
+
     object Kotlin {
         private const val version = "1.3.21"
         val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"

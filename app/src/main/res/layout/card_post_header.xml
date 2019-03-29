@@ -3,19 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="post"
-            type="app.akane.data.entity.Post" />
-
-        <variable
-            name="callbacks"
-            type="app.akane.ui.feed.FeedEpoxyController.Callback" />
-
-
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/card_header"
         android:layout_width="match_parent"
@@ -87,20 +74,34 @@
             app:layout_constraintTop_toBottomOf="@+id/username"
             tools:text="Are we alone in the whole universe?" />
 
-        <ImageButton
-            android:onClick="@{v -> callbacks.moreOptions(v)}"
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/options"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:onClick="@{v -> callbacks.moreOptions(v, post.postInfo)}"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            app:icon="@drawable/ic_round_more_vert_24px"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/date"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/sld_upvote_arrow" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="post"
+            type="app.akane.data.entity.Post" />
+
+        <variable
+            name="callbacks"
+            type="app.akane.ui.feed.FeedEpoxyController.Callback" />
+
+
+    </data>
 </layout>

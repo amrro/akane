@@ -6,6 +6,7 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.TypefaceSpan
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.annotation.DrawableRes
 import androidx.databinding.BindingAdapter
 import app.akane.data.entity.Post
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -13,6 +14,7 @@ import com.facebook.drawee.drawable.ProgressBarDrawable
 import com.facebook.drawee.drawable.ScalingUtils
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder
 import com.facebook.drawee.view.SimpleDraweeView
+import com.google.android.material.button.MaterialButton
 import net.dean.jraw.models.VoteDirection
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.temporal.ChronoUnit
@@ -23,6 +25,12 @@ import kotlin.math.roundToInt
  * Data Binding adapters specific to the app.
  */
 object BindingAdapters {
+
+    @JvmStatic
+    @BindingAdapter("android:icon")
+    fun materialButtonIcon(button: MaterialButton, @DrawableRes icon: Int) {
+        button.setIconResource(icon)
+    }
 
     @JvmStatic
     @BindingAdapter("frescoUri")

@@ -24,8 +24,8 @@ import timber.log.Timber
 
 class FeedViewModel @AssistedInject constructor(
     @Assisted val initialState: FeedViewState,
-    val repository: FeedRepository,
-    val dispatchers: AppCoroutineDispatchers
+    private val repository: FeedRepository,
+    private val dispatchers: AppCoroutineDispatchers
 ) : BaseMvRxViewModel<FeedViewState>(initialState, debugMode = false) {
 
     val snackbarMessage = SnackbarMessage()
@@ -104,6 +104,12 @@ class FeedViewModel @AssistedInject constructor(
             scope.launch(dispatchers.io) { block() }
         } catch (ex: Exception) {
             onError(ex)
+        }
+    }
+
+    internal fun sendMessage(text: String) {
+        if (!text.isNotEmpty()) {
+            snackbarMessage.value = text
         }
     }
 
