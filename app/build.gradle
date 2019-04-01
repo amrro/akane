@@ -31,6 +31,11 @@ android {
     androidExtensions {
         experimental = true
     }
+
+    packagingOptions {
+        exclude 'META-INF/atomicfu.kotlin_module'
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -83,7 +88,6 @@ dependencies {
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
     // Optional, if you use support library fragments:
     debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3'
-
 
     implementation Deps.Paging.runtime
     implementation Deps.Paging.rxjava2

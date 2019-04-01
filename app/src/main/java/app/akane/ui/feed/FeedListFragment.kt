@@ -7,16 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import app.akane.R
 import app.akane.data.entity.Post
+import app.akane.data.entity.PostInfo
 import app.akane.databinding.FragmentSubmissionsListBinding
 import app.akane.util.BaseMvRxFragment
 import app.akane.util.SnackbarMessage
-import app.akane.util.checker
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
 import com.google.android.material.button.MaterialButton
@@ -39,15 +40,12 @@ class FeedListFragment : BaseMvRxFragment() {
     private lateinit var actionsViewModel: ActionsViewModel
 
     private val subredditName: String by lazy {
-        val name = arguments?.getString(KEY_SUBREDDIT_NAME)
-        checker(!name.isNullOrEmpty()) {
-            "subreddit's name shouldn't be null!"
-        }
-        name!!
+        requireArguments().getString(KEY_SUBREDDIT_NAME)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         controller =
             FeedEpoxyController(object : FeedEpoxyController.Callback {
                 override fun upvote(view: View, post: Post) {
@@ -60,19 +58,42 @@ class FeedListFragment : BaseMvRxFragment() {
 
 
                 override fun save(post: Post) {
-                    actionsViewModel.save(post.postInfo.id)
+//                    actionsViewModel.save(post.postInfo.id)
                 }
 
                 override fun hide(post: Post) {
-                    actionsViewModel.hide(post.postInfo.id)
+//                    actionsViewModel.hide(post.postInfo.id)
                 }
 
-                override fun moreOptions(view: View) {
+                override fun moreOptions(view: View, info: PostInfo) {
                     val moreOptionsPopMenu = PopupMenu(context, view)
                     moreOptionsPopMenu.menuInflater.inflate(
                         R.menu.menu_card_more_options,
                         moreOptionsPopMenu.menu
                     )
+                    moreOptionsPopMenu.setOnMenuItemClickListener { menuItem ->
+                        when (menuItem.itemId) {
+                            R.id.action_save_post -> {
+                                actionsViewModel.save(info)
+                            }
+                            R.id.action_hide_post -> {
+                                actionsViewModel.hide(info)
+                            }
+                            R.id.action_open_in_browser -> {
+                                actionsViewModel.openInBrowser(info)
+                            }
+                            R.id.action_copy_link -> {
+                                actionsViewModel.copyPostLink(info)
+                            }
+                            R.id.action_block_user -> {
+                                actionsViewModel.blockUser(info)
+                            }
+                            else -> {
+                            }
+                        }
+
+                        true
+                    }
                     moreOptionsPopMenu.show()
                 }
             },
@@ -121,6 +142,8 @@ class FeedListFragment : BaseMvRxFragment() {
                         onFeedConfigurationChanged(SubredditSort.NEW)
                         button.text = "New"
                     }
+
+                    // TOP
                     R.id.action_feed_sort_top_hour -> {
                         onFeedConfigurationChanged(SubredditSort.TOP, TimePeriod.HOUR)
                         button.text = "Top (hour)"
@@ -146,7 +169,7 @@ class FeedListFragment : BaseMvRxFragment() {
                         button.text = "Top (All Time)"
                     }
 
-
+                    // CONTROVERSIAL.
                     R.id.action_feed_sort_controversial_hour -> {
                         onFeedConfigurationChanged(SubredditSort.CONTROVERSIAL, TimePeriod.HOUR)
                         button.text = "Controversial (hour)"
@@ -171,10 +194,8 @@ class FeedListFragment : BaseMvRxFragment() {
                         onFeedConfigurationChanged(SubredditSort.CONTROVERSIAL, TimePeriod.ALL)
                         button.text = "Controversial (All Time)"
                     }
-
                     else -> false
                 }
-
                 true
             }
 
@@ -237,9 +258,8 @@ class FeedListFragment : BaseMvRxFragment() {
             }
 
             return FeedListFragment().apply {
-                arguments = Bundle().apply { putString(KEY_SUBREDDIT_NAME, subredditName) }
+                arguments = bundleOf(KEY_SUBREDDIT_NAME to subredditName)
             }
         }
     }
-
 }

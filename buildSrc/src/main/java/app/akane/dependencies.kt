@@ -61,7 +61,7 @@ object Deps {
     }
 
     object Coroutines {
-        private const val version = "1.1.1"
+        private const val version = "1.2.0-alpha"
         val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
         val rx2 = "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$version"
         val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"

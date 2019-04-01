@@ -1,19 +1,18 @@
 package app.akane.ui.feed
 
 import android.view.View
+import app.akane.*
 import app.akane.CardImageBindingModel_
-import app.akane.CardLinkBindingModel_
-import app.akane.CardTextBindingModel_
-import app.akane.data.entity.Post
 import app.akane.feedOptions
-import app.akane.util.checker
+import app.akane.data.entity.Post
+import app.akane.data.entity.PostInfo
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.paging.PagedListEpoxyController
 
 class FeedEpoxyController
     (
-    val callbacks: Callback,
-    val feedbackOptions: FeedOptionsCallback
+    private val callbacks: Callback,
+    private val feedbackOptions: FeedOptionsCallback
 ) : PagedListEpoxyController<Post>() {
 
 
@@ -22,7 +21,7 @@ class FeedEpoxyController
         fun downvote(post: Post)
         fun save(post: Post)
         fun hide(post: Post)
-        fun moreOptions(view: View)
+        fun moreOptions(view: View, info: PostInfo)
     }
 
     interface FeedOptionsCallback {
@@ -43,17 +42,25 @@ class FeedEpoxyController
 
     override fun buildItemModel(currentPosition: Int, item: Post?): EpoxyModel<*> {
 
-        checker(item != null) {
-            "buildItemModel(currentPosition: $currentPosition, item: $item): item cannot be null"
-        }
-
-        checker(item?.postInfo != null) {
-            "buildItemModel(currentPosition: $currentPosition, item: $item): item cannot be null"
-        }
+//        checker(item != null) {
+//            "buildItemModel(currentPosition: $currentPosition, item: $item): item cannot be null"
+//        }
+//
+//        checker(item?.postInfo != null) {
+//            "buildItemModel(currentPosition: $currentPosition, item: $item): item cannot be null"
+//        }
+//
         if (item == null) {
             return CardLinkBindingModel_()
                 .id(currentPosition)
         }
+
+
+        if (item.postInfo.isHidden) {
+            return RemovedCardBindingModel_()
+                .id(item.postInfo.id)
+        }
+
 
         if (item.postInfo.isSelfPost && item.postInfo.selfText.isNotEmpty()) {
             return CardTextBindingModel_()

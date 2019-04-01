@@ -8,16 +8,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
 import androidx.appcompat.app.AppCompatActivity;
-
+import app.akane.AkaneApp;
+import app.akane.R;
 import net.dean.jraw.oauth.OAuthException;
 import net.dean.jraw.oauth.StatefulAuthHelper;
 
 import java.lang.ref.WeakReference;
-
-import app.akane.AkaneApp;
-import app.akane.R;
 
 /**
  * This activity is dedicated to a WebView to guide the user through the authentication process.
@@ -59,7 +56,7 @@ public class NewUserActivity extends AppCompatActivity {
         });
 
         // Generate an authentication URL
-        String[] scopes = new String[]{ "read", "identity", "vote" };
+        String[] scopes = new String[]{"read", "identity", "vote", "save", "report"};
         String authUrl = helper.getAuthorizationUrl(true, true, scopes);
 
         // Finally, show the authorization URL to the user

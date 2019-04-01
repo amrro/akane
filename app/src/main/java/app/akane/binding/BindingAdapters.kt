@@ -4,6 +4,7 @@ import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.text.style.TypefaceSpan
+import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.annotation.DrawableRes
@@ -26,11 +27,18 @@ import kotlin.math.roundToInt
  */
 object BindingAdapters {
 
-    @JvmStatic
-    @BindingAdapter("android:icon")
-    fun materialButtonIcon(button: MaterialButton, @DrawableRes icon: Int) {
-        button.setIconResource(icon)
-    }
+
+//    @JvmStatic
+//    @BindingAdapter("isHidden")
+//    fun hide(view: View, isHidden: Boolean) {
+//        view.visibility = if (isHidden) View.GONE else View.VISIBLE
+//    }
+
+//    @JvmStatic
+//    @BindingAdapter("android:icon")
+//    fun materialButtonIcon(button: MaterialButton, @DrawableRes icon: Int) {
+//        button.setIconResource(icon)
+//    }
 
     @JvmStatic
     @BindingAdapter("frescoUri")
