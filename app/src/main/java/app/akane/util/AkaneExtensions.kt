@@ -4,10 +4,15 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.newCoroutineContext
 import org.threeten.bp.DateTimeUtils
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZoneId
 import java.util.*
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 
 fun Date.toLocalDateTime(): LocalDateTime =
     LocalDateTime.ofInstant(DateTimeUtils.toInstant(this), ZoneId.systemDefault())
@@ -25,5 +30,19 @@ fun Context.browse(url: String, newTask: Boolean = false): Boolean {
     } catch (e: ActivityNotFoundException) {
         e.printStackTrace()
         false
+    }
+}
+
+
+fun CoroutineScope.safeRequest(
+    context: CoroutineContext = EmptyCoroutineContext,
+    onError: (Exception) -> Unit,
+    block: suspend () -> Unit
+) {
+    val newContext = newCoroutineContext(context)
+    try {
+        launch(newContext) { block() }
+    } catch (ex: Exception) {
+        onError(ex)
     }
 }

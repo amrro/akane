@@ -12,14 +12,12 @@ import app.akane.data.repo.post.PostActionsRepository
 import app.akane.util.AppCoroutineDispatchers
 import app.akane.util.SnackbarMessage
 import app.akane.util.browse
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.plus
+import kotlinx.coroutines.*
 import timber.log.Timber
 import javax.inject.Inject
 
 
+@ExperimentalCoroutinesApi
 class ActionsViewModel @Inject constructor(
     app: Application,
     private val repository: PostActionsRepository,
@@ -35,21 +33,29 @@ class ActionsViewModel @Inject constructor(
         }
 
     private val scope = viewModelScope + supervisor + exceptionHandler
+    private val requester = Requester(scope)
 
-
-    fun upvote(postId: String) = safeRequest { repository.upvote(postId) }
-
-    fun downvote(postId: String) = safeRequest { repository.downvote(postId) }
-
-    fun save(postInfo: PostInfo) = safeRequest {
-        repository.save(postInfo.id)
-        sendMessage("💾 Saved!")
+    fun upvote(postId: String) = requester.enqueue {
+        safeRequest { repository.upvote(postId) }
     }
 
-    fun hide(postInfo: PostInfo) = safeRequest { repository.hide(postInfo.id) }
+    fun downvote(postId: String) = requester.enqueue {
+        safeRequest { repository.downvote(postId) }
+    }
+
+    fun save(postInfo: PostInfo) = requester.enqueue {
+        safeRequest {
+            repository.save(postInfo.id)
+            sendMessage("💾 Saved!")
+        }
+    }
+
+    fun hide(postInfo: PostInfo) = requester.enqueue {
+        safeRequest { repository.hide(postInfo.id) }
+    }
 
     fun openInBrowser(info: PostInfo) {
-        getApplication<AkaneApp>().browse(info.url)
+        getApplication<AkaneApp>().browse(info.url, true)
     }
 
     fun copyPostLink(info: PostInfo) {
@@ -60,6 +66,7 @@ class ActionsViewModel @Inject constructor(
     }
 
     fun blockUser(info: PostInfo) {
+        TODO("Do the blockUser()")
     }
 
     private fun onError(cause: Throwable) = runOnMain {
@@ -69,14 +76,12 @@ class ActionsViewModel @Inject constructor(
 
 
     private fun runOnMain(action: () -> Unit) {
-        viewModelScope.launch(dispatchers.main) {
+        scope.launch(dispatchers.main) {
             action()
         }
     }
 
     private fun safeRequest(block: suspend () -> Unit) {
-
-        // TODO: return Completable Signal or CompletableSomething.
         try {
             scope.launch(dispatchers.io) { block() }
         } catch (ex: Exception) {
@@ -90,4 +95,9 @@ class ActionsViewModel @Inject constructor(
         }
     }
 
+
+    override fun onCleared() {
+        requester.stop()
+        super.onCleared()
+    }
 }

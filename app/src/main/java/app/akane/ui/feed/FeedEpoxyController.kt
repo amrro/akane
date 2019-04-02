@@ -2,8 +2,6 @@ package app.akane.ui.feed
 
 import android.view.View
 import app.akane.*
-import app.akane.CardImageBindingModel_
-import app.akane.feedOptions
 import app.akane.data.entity.Post
 import app.akane.data.entity.PostInfo
 import com.airbnb.epoxy.EpoxyModel
@@ -41,15 +39,6 @@ class FeedEpoxyController
 
 
     override fun buildItemModel(currentPosition: Int, item: Post?): EpoxyModel<*> {
-
-//        checker(item != null) {
-//            "buildItemModel(currentPosition: $currentPosition, item: $item): item cannot be null"
-//        }
-//
-//        checker(item?.postInfo != null) {
-//            "buildItemModel(currentPosition: $currentPosition, item: $item): item cannot be null"
-//        }
-//
         if (item == null) {
             return CardLinkBindingModel_()
                 .id(currentPosition)
