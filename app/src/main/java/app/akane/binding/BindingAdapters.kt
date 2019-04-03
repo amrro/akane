@@ -47,8 +47,7 @@ object BindingAdapters {
                     (preview.height * (frescoImage.width.toFloat() / preview.width.toFloat())).roundToInt()
                 this.controller = controller
                 this.hierarchy = hierarchy
-                setImageURI(preview.link)
-
+                this.setImageURI(preview.link)
             }
         }
     }
