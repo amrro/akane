@@ -3,45 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="post"
-            type="app.akane.data.entity.Post" />
-
-        <variable
-            name="callbacks"
-            type="app.akane.ui.feed.FeedEpoxyController.Callback" />
-
-
-    </data>
-
     <com.google.android.material.card.MaterialCardView
+        style="@style/Widget.MaterialComponents.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:cardBackgroundColor="#FFFFFF"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:cardUseCompatPadding="true"
-        app:strokeColor="@color/colorAccent">
+        app:strokeColor="#EDB740"
+        app:cardUseCompatPadding="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-            <include
-                android:id="@+id/header_view"
-                layout="@layout/card_post_header"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                app:callbacks="@{callbacks}"
-                app:layout_constraintBottom_toTopOf="@+id/actions_view"
-                app:layout_constraintTop_toBottomOf="@+id/image"
-                app:post="@{post}"
-                tools:layout_editor_absoluteX="0dp" />
 
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/image"
@@ -54,11 +29,29 @@
                 app:fadeDuration="300"
                 app:layout_constraintBottom_toTopOf="@+id/header_view"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="spread_inside"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toBottomOf="@id/image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@drawable/gradient_background" />
+
+            <include
+                android:id="@+id/header_view"
+                layout="@layout/card_post_header"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                app:callbacks="@{callbacks}"
+                app:layout_constraintBottom_toTopOf="@+id/actions_view"
+                app:layout_constraintTop_toBottomOf="@+id/divider"
+                app:post="@{post}" />
 
             <include
                 android:id="@+id/actions_view"
@@ -77,4 +70,17 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
+    <data>
+
+        <variable
+            name="post"
+            type="app.akane.data.entity.Post" />
+
+        <variable
+            name="callbacks"
+            type="app.akane.ui.feed.FeedEpoxyController.Callback" />
+
+
+    </data>
 </layout>

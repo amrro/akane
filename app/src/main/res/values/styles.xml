@@ -3,13 +3,13 @@
     <!-- Base application theme. -->
     <style name="Theme.Akane" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
-        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
-        <!--<item name="colorAccent">@color/colorAccent</item>-->
-
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:navigationBarColor">@color/colorAccent</item>
         <item name="android:fontFamily">@font/rubik_regular</item>
+        <item name="android:windowTranslucentNavigation">true</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
-
     </style>
 
     <style name="Theme.Akane.NoActionBar">

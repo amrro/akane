@@ -19,7 +19,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Akane.NoActionBar">
+            android:theme="@style/Theme.Akane">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -3,25 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="state"
-            type="app.akane.ui.feed.FeedViewState" />
-
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/gradient_background"
         tools:context=".ui.feed.popular.PopularFeedFragment">
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/feed_swipe_refresh"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
             app:isRefreshing="@{state.isLoading}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,4 +37,12 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="state"
+            type="app.akane.ui.feed.FeedViewState" />
+
+    </data>
 </layout>

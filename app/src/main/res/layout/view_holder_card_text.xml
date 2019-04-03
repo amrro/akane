@@ -17,12 +17,11 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
+        style="@style/Widget.MaterialComponents.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:cardBackgroundColor="#FFFFFF"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
         app:cardUseCompatPadding="true"
         app:strokeColor="@color/colorAccent">
 

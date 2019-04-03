@@ -3,7 +3,7 @@
 
 # Akane 
 
-[ah·KAH·nay](https://en.wikipedia.org/wiki/Akane) (あかね, アカネ) is the Japanese female name or a word for 'deep red' (Redd·it). 
+[ah·KAH·nay](https://en.wikipedia.org/wiki/Akane) (あかね, アカネ) is the Japanese female name or a word for 'deep red' (Redd·it) and is associated with red (from the red dye made from its roots) and brilliant red.
 
 ## Motivations
 This project is my way to explore Android Framework and new third-party libraries and see them work together in MVVM pattern to test all together.
