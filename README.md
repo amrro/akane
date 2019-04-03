@@ -18,4 +18,5 @@ This project is my dojo. I am not trying to build another replica for reddit app
 
 ## Architecture 
 The database (Room) is the single source of truth in this pattern. Any change or action has to be applied to the database to be reflected on the UI changes.
-![app architecture](https://github.com/amrro/akane/blob/master/art/511a702ae4af43cd.png)
+
+![app architecture](https://github.com/amrro/akane/blob/master/art/pattern.png)
