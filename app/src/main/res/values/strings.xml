@@ -6,6 +6,7 @@
     <string name="dot_separator">·</string>
     <string name="upvote_content_desc">Upvote Button</string>
     <string name="sample_long_text" tools:keep="@string/sample_long_text">Material is an adaptable system of guidelines, components, and tools that support the best practices of user interface design. Backed by open-source code, Material streamlines collaboration between designers and developers, and helps teams quickly build beautiful products.</string>
+    <string name="action_login">Login</string>
 
 
 </resources>

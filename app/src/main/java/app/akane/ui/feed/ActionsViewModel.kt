@@ -12,12 +12,14 @@ import app.akane.data.repo.post.PostActionsRepository
 import app.akane.util.AppCoroutineDispatchers
 import app.akane.util.SnackbarMessage
 import app.akane.util.browse
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.plus
 import timber.log.Timber
 import javax.inject.Inject
 
 
-@ExperimentalCoroutinesApi
 class ActionsViewModel @Inject constructor(
     app: Application,
     private val repository: PostActionsRepository,
