@@ -16,17 +16,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Akane"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Akane">
+            android:theme="@style/Theme.Akane" />
+
+
+        <activity android:name=".ui.auth.NewUserActivity" />
+
+        <activity-alias
+            android:name=".Launcher"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".ui.auth.NewUserActivity" />
+        </activity-alias>
 
 
         <meta-data

@@ -16,7 +16,7 @@ object Deps {
 
 
     object Google {
-        val material = "com.google.android.material:material:1.1.0-alpha04"
+        val material = "com.google.android.material:material:1.1.0-alpha05"
         val firebaseCore = "com.google.firebase:firebase-core:16.0.4"
         val crashlytics = "com.crashlytics.sdk.android:crashlytics:2.9.8"
         val gmsGoogleServices = "com.google.gms:google-services:4.2.0"
@@ -24,12 +24,26 @@ object Deps {
     }
 
     object AndroidX {
-        val appcompat = "androidx.appcompat:appcompat:1.0.2"
+        val appcompat = "androidx.appcompat:appcompat:1.1.0-alpha04"
+        val recyclerView = "androidx.recyclerview:recyclerview:1.1.0-alpha04"
         val corekts = "androidx.core:core-ktx:1.1.0-alpha05"
-        val constraint = "androidx.constraintlayout:constraintlayout:1.1.3"
+        val constraint = "androidx.constraintlayout:constraintlayout:2.0.0-alpha4"
         val legacy = "androidx.legacy:legacy-support-v4:1.0.0"
-        val viewpager = "androidx.viewpager2:viewpager2:1.0.0-alpha01"
+        val viewpager2 = "androidx.viewpager2:viewpager2:1.0.0-alpha03"
+    }
 
+    object LeakCanary {
+        private const val version = "1.6.3"
+        val debug = "com.squareup.leakcanary:leakcanary-android:$version"
+        val release = "com.squareup.leakcanary:leakcanary-android-no-op:$version"
+        val fragment = "com.squareup.leakcanary:leakcanary-support-fragment:$version"
+    }
+
+
+    object Facebook {
+        val frescoVersion = "1.13.0"
+        val fresco = "com.facebook.fresco:fresco:$frescoVersion"
+        val frescoGif = "com.facebook.fresco:animated-gif:$frescoVersion"
     }
 
     object Glide {
@@ -61,7 +75,7 @@ object Deps {
     }
 
     object Coroutines {
-        private const val version = "1.2.0-alpha"
+        private const val version = "1.2.0-alpha-2"
         val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
         val rx2 = "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$version"
         val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
@@ -76,7 +90,7 @@ object Deps {
     }
 
     object Fragment {
-        private const val version = "1.1.0-alpha05"
+        private const val version = "1.1.0-alpha06"
         val fragment = "androidx.fragment:fragment:$version"
         val fragmentKtx = "androidx.fragment:fragment-ktx:$version"
     }
@@ -102,11 +116,6 @@ object Deps {
     object Helpers {
         private const val timberVersion = "4.7.1"
         val timber = "com.jakewharton.timber:timber:$timberVersion"
-    }
-
-    object Arrow {
-        private const val version = "0.9.1-SNAPSHOT"
-        val core = "io.arrow-kt:arrow-core-data:$version"
     }
 
     object MvRx {
