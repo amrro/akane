@@ -6,7 +6,6 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
         tools:context=".MainActivity">
 
         <androidx.viewpager.widget.ViewPager
@@ -17,7 +16,6 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-
             android:layout_height="wrap_content"
             android:theme="@style/Theme.Akane.AppBarOverlay">
 
@@ -26,6 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_scrollFlags="scroll|enterAlways|snap"
+                app:layout_scrollInterpolator="@android:interpolator/fast_out_slow_in"
                 app:subtitle="For Reddit 😺"
                 app:title="Akane" />
 

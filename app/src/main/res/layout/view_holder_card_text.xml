@@ -17,13 +17,9 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        style="@style/Widget.MaterialComponents.CardView"
+        style="@style/Theme.Akane.CardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:cardBackgroundColor="#FFFFFF"
-        app:cardUseCompatPadding="true"
-        app:strokeColor="@color/colorAccent">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/card_view"
@@ -44,7 +40,7 @@
 
 
             <TextView
-                android:id="@+id/image"
+                android:id="@+id/body"
                 android:text="@{post.postInfo.selfText}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -53,10 +49,13 @@
                 android:layout_marginStart="16dp"
                 android:maxLines="3"
                 android:ellipsize="end"
+                style="@android:style/TextAppearance.Material.Body2"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/header_view"
-                tools:text="@string/sample_long_text" />
+                tools:text="@string/sample_long_text"
+                android:fontFamily="@font/rubik_regular" />
 
 
             <include
@@ -69,7 +68,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image"
+                app:layout_constraintTop_toBottomOf="@+id/body"
                 app:post="@{post}" />
 
 
