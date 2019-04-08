@@ -1,5 +1,7 @@
 package app.akane.binding
 
+import android.graphics.Color
+import android.graphics.ColorSpace
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
@@ -7,6 +9,7 @@ import android.text.style.TypefaceSpan
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import app.akane.R
 import app.akane.data.entity.Post
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.drawable.ProgressBarDrawable
@@ -36,9 +39,16 @@ object BindingAdapters {
                 .setAutoPlayAnimations(true)
                 .build()
 
+            val progressBarDrawable = ProgressBarDrawable().apply {
+                this.color = Color.RED
+                this.backgroundColor = app.akane.R.color.colorPrimary
+                this.setPadding(0)
+                this.barWidth = 5
+            }
+
             val hierarchy = GenericDraweeHierarchyBuilder(frescoImage.context.resources)
-                .setPlaceholderImage(app.akane.R.drawable.ic_round_bookmarked_24px)
-                .setProgressBarImage(ProgressBarDrawable().apply { color = app.akane.R.color.colorPrimary })
+                .setPlaceholderImage(app.akane.R.drawable.ic_baseline_photo_24px)
+                .setProgressBarImage(progressBarDrawable)
                 .setActualImageScaleType(ScalingUtils.ScaleType.FIT_CENTER)
                 .build()
 
