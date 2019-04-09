@@ -5,11 +5,9 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import app.akane.databinding.ActivityMainBinding
 import app.akane.ui.auth.NewUserActivity
-import app.akane.ui.feed.HomePagerAdapter
+import app.akane.ui.home.HomeFragment
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
@@ -19,16 +17,14 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
-    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        setContentView(R.layout.activity_main)
 
-        setSupportActionBar(binding.mainToolbar)
-        binding.viewPager.run {
-            adapter = HomePagerAdapter(this@MainActivity, supportFragmentManager)
-            binding.tabs.setupWithViewPager(this)
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.fragment_container, HomeFragment(), "HomeFragment").commit()
         }
     }
 
@@ -55,7 +51,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         // The user could have pressed the back button before authorizing our app, make sure we have
         // an authenticated user before starting the UserOverviewActivity.
         if (requestCode == REQ_CODE_LOGIN && resultCode == RESULT_OK) {
-            // TODO: handle that.
+            recreate()
         }
     }
 

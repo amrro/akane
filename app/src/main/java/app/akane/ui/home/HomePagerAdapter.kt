@@ -1,9 +1,10 @@
-package app.akane.ui.feed
+package app.akane.ui.home
 
 import android.content.Context
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import app.akane.R
+import app.akane.ui.feed.FeedListFragment
 
 private val TAB_TITLES = arrayOf(
         R.string.tab_home,

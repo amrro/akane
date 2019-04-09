@@ -8,22 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">@font/rubik_regular</item>
         <!--        <item name="android:hyphenationFrequency">none</item>-->
-        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
     <style name="Theme.Akane.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-    </style>
-
-
-    <style name="AppBottomSheetDialogTheme" parent="Theme.MaterialComponents.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/AppModalStyle</item>
-    </style>
-
-    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/rounded_dialog</item>
-        <item name="android:layout_margin">8dp</item>
     </style>
 
     <style name="Theme.Akane.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
