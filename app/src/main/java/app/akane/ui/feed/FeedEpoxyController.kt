@@ -19,8 +19,7 @@ class FeedEpoxyController
     interface Callback {
         fun upvote(view: View, post: Post)
         fun downvote(post: Post)
-        fun save(post: Post)
-        fun hide(post: Post)
+        fun share(post: Post)
         fun moreOptions(view: View, info: PostInfo)
     }
 
@@ -80,8 +79,8 @@ class FeedEpoxyController
     private val onTouchListener = View.OnTouchListener { v, event ->
         when {
             MotionEvent.ACTION_DOWN == event.action -> v.animate()
-                .scaleX(.98F)
-                .scaleY(.98F)
+                .scaleX(.96F)
+                .scaleY(.96F)
                 .setInterpolator(AccelerateDecelerateInterpolator())
                 .setDuration(300L)
             event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_CANCEL -> v.animate()

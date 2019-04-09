@@ -7,12 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.core.app.ShareCompat
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import app.akane.R
 import app.akane.data.entity.Post
 import app.akane.data.entity.PostInfo
 import app.akane.databinding.FragmentSubmissionsListBinding
@@ -25,6 +25,7 @@ import com.google.android.material.snackbar.Snackbar
 import net.dean.jraw.models.SubredditSort
 import net.dean.jraw.models.TimePeriod
 import javax.inject.Inject
+
 
 class FeedListFragment : BaseMvRxFragment() {
 
@@ -57,35 +58,32 @@ class FeedListFragment : BaseMvRxFragment() {
                 }
 
 
-                override fun save(post: Post) {
-//                    actionsViewModel.save(post.postInfo.id)
+                override fun share(post: Post) {
+                    sharePost(post)
                 }
 
-                override fun hide(post: Post) {
-//                    actionsViewModel.hide(post.postInfo.id)
-                }
 
                 override fun moreOptions(view: View, info: PostInfo) {
                     val moreOptionsPopMenu = PopupMenu(context, view)
                     moreOptionsPopMenu.menuInflater.inflate(
-                        R.menu.menu_card_more_options,
+                        app.akane.R.menu.menu_card_more_options,
                         moreOptionsPopMenu.menu
                     )
                     moreOptionsPopMenu.setOnMenuItemClickListener { menuItem ->
                         when (menuItem.itemId) {
-                            R.id.action_save_post -> {
+                            app.akane.R.id.action_save_post -> {
                                 actionsViewModel.save(info)
                             }
-                            R.id.action_hide_post -> {
+                            app.akane.R.id.action_hide_post -> {
                                 actionsViewModel.hide(info)
                             }
-                            R.id.action_open_in_browser -> {
+                            app.akane.R.id.action_open_in_browser -> {
                                 actionsViewModel.openInBrowser(info)
                             }
-                            R.id.action_copy_link -> {
+                            app.akane.R.id.action_copy_link -> {
                                 actionsViewModel.copyPostLink(info)
                             }
-                            R.id.action_block_user -> {
+                            app.akane.R.id.action_block_user -> {
                                 actionsViewModel.blockUser(info)
                             }
                             else -> {
@@ -114,7 +112,7 @@ class FeedListFragment : BaseMvRxFragment() {
     ): View? {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_submissions_list,
+            app.akane.R.layout.fragment_submissions_list,
             container,
             false
         )
@@ -125,72 +123,72 @@ class FeedListFragment : BaseMvRxFragment() {
     fun showFeedOptions(button: MaterialButton) {
         PopupMenu(context, button, Gravity.BOTTOM).apply {
             this.menuInflater.inflate(
-                R.menu.menu_sort_type,
+                app.akane.R.menu.menu_sort_type,
                 this.menu
             )
             this.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
-                    R.id.action_feed_sort_best -> {
+                    app.akane.R.id.action_feed_sort_best -> {
                         onFeedConfigurationChanged(SubredditSort.BEST)
                         button.text = "Best"
                     }
-                    R.id.action_feed_sort_hot -> {
+                    app.akane.R.id.action_feed_sort_hot -> {
                         onFeedConfigurationChanged(SubredditSort.HOT)
                         button.text = "Hot"
                     }
-                    R.id.action_feed_sort_new -> {
+                    app.akane.R.id.action_feed_sort_new -> {
                         onFeedConfigurationChanged(SubredditSort.NEW)
                         button.text = "New"
                     }
 
                     // TOP
-                    R.id.action_feed_sort_top_hour -> {
+                    app.akane.R.id.action_feed_sort_top_hour -> {
                         onFeedConfigurationChanged(SubredditSort.TOP, TimePeriod.HOUR)
                         button.text = "Top (hour)"
                     }
-                    R.id.action_feed_sort_top_24_hour -> {
+                    app.akane.R.id.action_feed_sort_top_24_hour -> {
                         onFeedConfigurationChanged(SubredditSort.TOP, TimePeriod.DAY)
                         button.text = "Top (24 Hour)"
                     }
-                    R.id.action_feed_sort_top_week -> {
+                    app.akane.R.id.action_feed_sort_top_week -> {
                         onFeedConfigurationChanged(SubredditSort.TOP, TimePeriod.WEEK)
                         button.text = "Top (Week)"
                     }
-                    R.id.action_feed_sort_top_month -> {
+                    app.akane.R.id.action_feed_sort_top_month -> {
                         onFeedConfigurationChanged(SubredditSort.TOP, TimePeriod.MONTH)
                         button.text = "Top (Month)"
                     }
-                    R.id.action_feed_sort_top_year -> {
+                    app.akane.R.id.action_feed_sort_top_year -> {
                         onFeedConfigurationChanged(SubredditSort.TOP, TimePeriod.YEAR)
                         button.text = "Top (Year)"
                     }
-                    R.id.action_feed_sort_top_all_time -> {
+                    app.akane.R.id.action_feed_sort_top_all_time -> {
                         onFeedConfigurationChanged(SubredditSort.TOP, TimePeriod.ALL)
                         button.text = "Top (All Time)"
                     }
 
                     // CONTROVERSIAL.
-                    R.id.action_feed_sort_controversial_hour -> {
+                    app.akane.R.id.action_feed_sort_controversial_hour -> {
                         onFeedConfigurationChanged(SubredditSort.CONTROVERSIAL, TimePeriod.HOUR)
                         button.text = "Controversial (hour)"
                     }
-                    R.id.action_feed_sort_controversial_24_hour -> {
+                    app.akane.R.id.action_feed_sort_controversial_24_hour -> {
                         onFeedConfigurationChanged(SubredditSort.CONTROVERSIAL, TimePeriod.DAY)
                         button.text = "Controversial (24 Hour)"
                     }
-                    R.id.action_feed_sort_controversial_week -> {
+                    app.akane.R.id.action_feed_sort_controversial_week -> {
                         onFeedConfigurationChanged(SubredditSort.CONTROVERSIAL, TimePeriod.WEEK)
                         button.text = "Controversial (Week)"
                     }
-                    R.id.action_feed_sort_controversial_month -> {
+                    app.akane.R.id.action_feed_sort_controversial_month -> {
                         onFeedConfigurationChanged(SubredditSort.CONTROVERSIAL, TimePeriod.MONTH)
                         button.text = "Controversial (Month)"
                     }
-                    R.id.action_feed_sort_controversial_year -> {
+                    app.akane.R.id.action_feed_sort_controversial_year -> {
                         onFeedConfigurationChanged(SubredditSort.CONTROVERSIAL, TimePeriod.YEAR)
                         button.text = "Controversial (Year)"
                     }
-                    R.id.action_feed_sort_controversial_all_time -> {
+                    app.akane.R.id.action_feed_sort_controversial_all_time -> {
                         onFeedConfigurationChanged(SubredditSort.CONTROVERSIAL, TimePeriod.ALL)
                         button.text = "Controversial (All Time)"
                     }
@@ -241,6 +239,15 @@ class FeedListFragment : BaseMvRxFragment() {
                     .show()
             }
         }
+    }
+
+
+    private fun sharePost(post: Post) {
+        ShareCompat.IntentBuilder.from(activity)
+            .setText(post.postInfo.linkToComments)
+            .setSubject("Me Gusta")
+            .setType("text/plain")
+            .startChooser()
     }
 
     private fun setupSnackbar() {

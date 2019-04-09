@@ -115,4 +115,10 @@ data class PostInfo(
 ) : Parcelable {
 
     constructor() : this(0)
+
+
+    val linkToComments: String
+        get() {
+            return "$title\nhttps://www.reddit.com$permalink"
+        }
 }
