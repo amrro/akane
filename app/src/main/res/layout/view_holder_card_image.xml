@@ -6,6 +6,7 @@
     <com.google.android.material.card.MaterialCardView
         style="@style/Theme.Akane.CardView"
         android:layout_width="match_parent"
+        app:onTouchListener="@{onTouchListner}"
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -79,6 +80,8 @@
             name="callbacks"
             type="app.akane.ui.feed.FeedEpoxyController.Callback" />
 
-
+        <variable
+            name="onTouchListner"
+            type="android.view.View.OnTouchListener" />
     </data>
 </layout>
