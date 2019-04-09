@@ -35,7 +35,11 @@
                 android:layout_height="wrap_content"
                 android:background="?attr/colorPrimary"
                 app:tabGravity="center"
-                app:tabIndicatorGravity="bottom" />
+                app:tabIndicator="@drawable/tabs_rounded_line_indicator"
+                app:tabIndicatorColor="#F7DDDB"
+                app:tabIndicatorFullWidth="true"
+                app:tabIndicatorGravity="bottom"
+                app:tabInlineLabel="true" />
 
 
         </com.google.android.material.appbar.AppBarLayout>
