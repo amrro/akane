@@ -5,6 +5,8 @@ import app.akane.util.AppCoroutineDispatchers
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import net.dean.jraw.android.AndroidHelper
 import net.dean.jraw.android.ManifestAppInfoProvider
 import net.dean.jraw.android.SharedPreferencesTokenStore
@@ -20,13 +22,10 @@ class AppModule {
     @Provides
     fun provideTokenStore(app: Application): SharedPreferencesTokenStore {
         return SharedPreferencesTokenStore(app.applicationContext).apply {
-            // Load stored tokens into memory
             this.load()
-            // Automatically save new tokens as they arrive
             this.autoPersist = true
         }
     }
-
 
     @Singleton
     @Provides

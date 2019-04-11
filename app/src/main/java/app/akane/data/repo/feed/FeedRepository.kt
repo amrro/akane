@@ -32,7 +32,7 @@ class FeedRepository @Inject constructor(
         return updateFrontPage(false)
     }
 
-    fun updateConfigs(
+    suspend fun updateConfigs(
         name: String,
         sort: SubredditSort,
         timePeriod: TimePeriod? = null

@@ -232,16 +232,6 @@ class FeedListFragment : BaseMvRxFragment() {
         }
     }
 
-    private val messageObserver = object : SnackbarMessage.SnackbarObserver {
-        override fun onNewMessage(snackbarMessageResourceId: String) {
-            view?.let {
-                Snackbar.make(it, snackbarMessageResourceId, Snackbar.LENGTH_LONG)
-                    .show()
-            }
-        }
-    }
-
-
     private fun sharePost(post: Post) {
         ShareCompat.IntentBuilder.from(activity)
             .setText(post.postInfo.linkToComments)
@@ -253,6 +243,15 @@ class FeedListFragment : BaseMvRxFragment() {
     private fun setupSnackbar() {
         feedViewModel.snackbarMessage.observe(this, messageObserver)
         actionsViewModel.snackbarMessage.observe(this, messageObserver)
+    }
+
+    private val messageObserver = object : SnackbarMessage.SnackbarObserver {
+        override fun onNewMessage(snackbarMessageResourceId: String) {
+            view?.let {
+                Snackbar.make(it, snackbarMessageResourceId, Snackbar.LENGTH_LONG)
+                    .show()
+            }
+        }
     }
 
 

@@ -1,25 +1,31 @@
 package app.akane.data.repo.post
 
-import app.akane.util.buildRequest
+import app.akane.ui.auth.RedditManager
+import app.akane.util.exception.MustLoginException
 import net.dean.jraw.models.VoteDirection
-import net.dean.jraw.oauth.AccountHelper
 import javax.inject.Inject
 
 class PostRemoteActions @Inject constructor(
-    accountHelper: AccountHelper
+    private val redditManager: RedditManager
 ) {
-    private val reddit = accountHelper.reddit
 
-
-    suspend fun vote(id: String, direction: VoteDirection) = buildRequest {
-        reddit.submission(id).setVote(direction)
+    suspend fun vote(id: String, direction: VoteDirection) = fireAction {
+        redditManager.reddit().submission(id).setVote(direction)
     }
 
-    suspend fun save(id: String, saved: Boolean = true) = buildRequest {
-        reddit.submission(id).setSaved(saved)
+    suspend fun save(id: String, saved: Boolean = true) = fireAction {
+        redditManager.reddit().submission(id).setSaved(saved)
     }
 
-    suspend fun hide(id: String, hidden: Boolean = true) = buildRequest {
-        reddit.submission(id).setHidden(hidden)
+    suspend fun hide(id: String, hidden: Boolean = true) = fireAction {
+        redditManager.reddit().submission(id).setHidden(hidden)
+    }
+
+    @Throws(MustLoginException::class)
+    suspend fun fireAction(block: suspend () -> Unit) {
+        if (!redditManager.isUserless())
+            block()
+        else
+            throw MustLoginException()
     }
 }

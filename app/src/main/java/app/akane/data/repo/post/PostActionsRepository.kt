@@ -19,7 +19,7 @@ class PostActionsRepository @Inject constructor(
     private suspend fun vote(postId: String, dir: VoteDirection) {
         val localPost = localActions.getPostWithId(postId)
 
-        // NOTE: Supposedly, the localPost shouldn't be null.
+        // NOTE: Supposedly, the localPost shouldn't be null at all.
         checker(localPost != null) {
             "PostActionsRepository.vote(postId: $postId, dir: $dir): How on earth localPost is null!"
         }

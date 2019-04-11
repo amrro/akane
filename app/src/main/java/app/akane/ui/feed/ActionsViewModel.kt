@@ -12,6 +12,7 @@ import app.akane.data.repo.post.PostActionsRepository
 import app.akane.util.AppCoroutineDispatchers
 import app.akane.util.SnackbarMessage
 import app.akane.util.browse
+import app.akane.util.exception.MustLoginException
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
@@ -72,6 +73,9 @@ class ActionsViewModel @Inject constructor(
     }
 
     private fun onError(cause: Throwable) = runOnMain {
+        if (cause is MustLoginException) {
+            // todo: open the login screen.
+        }
         cause.message?.let { sendMessage(it) }
         Timber.e(cause)
     }

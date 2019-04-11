@@ -43,7 +43,7 @@ class FeedViewModel @AssistedInject constructor(
         name: String,
         sort: SubredditSort = SubredditSort.HOT,
         timePeriod: TimePeriod? = null
-    ) {
+    ) = safeRequest {
         repository.updateConfigs(
             name.notNullOrEmpty { "FeedViewModel.setConfigs(name: $name): name of subreddit cannot be null!" },
             sort,

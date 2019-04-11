@@ -6,10 +6,11 @@ import javax.inject.Inject
 
 
 class SnackbarMessage @Inject constructor() : SingleLiveEvent<String>() {
+
     fun observe(owner: LifecycleOwner, observer: SnackbarObserver) {
         super.observe(owner, object : Observer<String> {
             override fun onChanged(t: String?) {
-                if (t == null) {
+                if (t.isNullOrEmpty()) {
                     return
                 }
                 observer.onNewMessage(t)

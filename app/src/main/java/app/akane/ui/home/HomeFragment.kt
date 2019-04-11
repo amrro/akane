@@ -16,7 +16,6 @@ import app.akane.databinding.FragmentHomeBinding
  */
 class HomeFragment : Fragment() {
 
-
     private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
@@ -35,6 +34,4 @@ class HomeFragment : Fragment() {
             binding.tabs.setupWithViewPager(this)
         }
     }
-
-
 }

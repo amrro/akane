@@ -1,22 +1,22 @@
 package app.akane.data.repo.feed
 
 import app.akane.data.mapper.SubmissionToPost
+import app.akane.ui.auth.RedditManager
 import app.akane.util.buildRequest
 import net.dean.jraw.models.Submission
 import net.dean.jraw.models.SubredditSort
 import net.dean.jraw.models.TimePeriod
-import net.dean.jraw.oauth.AccountHelper
 import net.dean.jraw.pagination.DefaultPaginator
 import javax.inject.Inject
 
 class FeedRemoteDataSource @Inject constructor(
-    private val accountHelper: AccountHelper,
+    private val redditManager: RedditManager,
     private val mapper: SubmissionToPost
 ) {
 
     private lateinit var pagination: DefaultPaginator<Submission>
 
-    fun updateConfigs(
+    suspend fun updateConfigs(
         subredditName: String,
         sorting: SubredditSort,
         timePeriod: TimePeriod? = null
@@ -26,9 +26,9 @@ class FeedRemoteDataSource @Inject constructor(
 
         // Prepare the new Pagination.
         val builder = if (subredditName == "frontpage") {
-            accountHelper.reddit.frontPage()
+            redditManager.reddit().frontPage()
         } else {
-            accountHelper.reddit.subreddit(subredditName).posts()
+            redditManager.reddit().subreddit(subredditName).posts()
         }
 
         timePeriod?.let { builder.timePeriod(timePeriod) }
