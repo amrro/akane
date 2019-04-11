@@ -45,6 +45,6 @@ class RedditManager @Inject constructor(
     companion object {
 
         const val USERNAME_USERLESS = "<userless>"
-        private val SCOPES = arrayOf("read", "identity", "vote", "save", "report")
+        val SCOPES = arrayOf("read", "identity", "vote", "save", "report")
     }
 }

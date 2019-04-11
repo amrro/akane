@@ -9,7 +9,6 @@ import com.jakewharton.threetenabp.AndroidThreeTen
 import com.squareup.leakcanary.LeakCanary
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
-import net.dean.jraw.oauth.AccountHelper
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 import javax.inject.Inject
@@ -42,8 +41,4 @@ class AkaneApp : Application(), HasActivityInjector {
     }
 
     override fun activityInjector() = dispatchingAndroidInjector
-
-    fun getAccountHelper(): AccountHelper {
-        return redditManager.accountHelper
-    }
 }
