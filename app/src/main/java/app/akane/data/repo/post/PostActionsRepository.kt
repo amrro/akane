@@ -39,7 +39,6 @@ class PostActionsRepository @Inject constructor(
             .also { localActions.updatePost(localPost.copy(vote = finalDestination)) }
     }
 
-
     suspend fun save(postId: String) {
         val localPost = localActions.getPostWithId(postId)
 

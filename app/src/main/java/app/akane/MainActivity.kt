@@ -13,7 +13,6 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
-
 class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     @Inject
@@ -49,7 +48,6 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     private fun onNewUserRequested() {
         startActivityForResult(Intent(this, NewUserActivity::class.java), REQ_CODE_LOGIN)
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

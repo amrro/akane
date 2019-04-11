@@ -5,12 +5,10 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-
 inline fun String?.notNullOrEmpty(lazyMessage: () -> Any): String {
     require(!this.isNullOrEmpty(), lazyMessage)
     return this
 }
-
 
 /**
  * This checker works only in debug mode in order to catch any
@@ -21,7 +19,6 @@ fun checker(predicate: Boolean, lazyMessage: () -> Any = {}) {
         require(predicate, lazyMessage)
     }
 }
-
 
 suspend fun <T> buildRequest(block: () -> T) = suspendCoroutine<T> { con ->
     try {

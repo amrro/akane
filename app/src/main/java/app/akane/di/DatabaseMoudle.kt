@@ -31,5 +31,4 @@ class DatabaseMoudle {
 
     @Provides
     fun provideImagePreviewDao(db: AkaneDataBase) = db.imagePreviewDao()
-
 }

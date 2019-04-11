@@ -33,7 +33,6 @@ class FeedLocalDataSource @Inject constructor(
 //        imagesDao.insertAll(entries)
 //    }
 
-
     suspend fun getPostWithId(id: String) = postDao.getPostWithId(id)
 
     suspend fun updatePost(new: PostInfo) = postDao.updatePost(new)

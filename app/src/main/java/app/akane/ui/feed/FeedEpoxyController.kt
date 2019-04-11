@@ -3,18 +3,20 @@ package app.akane.ui.feed
 import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
-import app.akane.*
+import app.akane.CardImageBindingModel_
+import app.akane.CardLinkBindingModel_
+import app.akane.CardTextBindingModel_
+import app.akane.RemovedCardBindingModel_
 import app.akane.data.entity.Post
 import app.akane.data.entity.PostInfo
+import app.akane.feedOptions
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.paging.PagedListEpoxyController
 
-class FeedEpoxyController
-    (
+class FeedEpoxyController(
     private val callbacks: Callback,
     private val feedbackOptions: FeedOptionsCallback
 ) : PagedListEpoxyController<Post>() {
-
 
     interface Callback {
         fun upvote(view: View, post: Post)
@@ -38,19 +40,16 @@ class FeedEpoxyController
         if (filteredModels.isNotEmpty()) super.addModels(models)
     }
 
-
     override fun buildItemModel(currentPosition: Int, item: Post?): EpoxyModel<*> {
         if (item == null) {
             return CardLinkBindingModel_()
                 .id(currentPosition)
         }
 
-
         if (item.postInfo.isHidden) {
             return RemovedCardBindingModel_()
                 .id(item.postInfo.id)
         }
-
 
         if (item.postInfo.isSelfPost && item.postInfo.selfText.isNotEmpty()) {
             return CardTextBindingModel_()
@@ -74,7 +73,6 @@ class FeedEpoxyController
             .callbacks(callbacks)
             .onTouchListner(onTouchListener)
     }
-
 
     private val onTouchListener = View.OnTouchListener { v, event ->
         when {

@@ -21,6 +21,5 @@ class AxiomViewModelFactory @Inject constructor(
         } catch (e: Exception) {
             throw RuntimeException(e)
         }
-
     }
 }

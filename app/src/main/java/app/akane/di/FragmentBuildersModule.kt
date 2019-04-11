@@ -29,6 +29,4 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeHomeFeedFragment(): FeedListFragment
-
-
 }

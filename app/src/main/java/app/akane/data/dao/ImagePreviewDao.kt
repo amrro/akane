@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import app.akane.data.entity.ImagePreview
 
-
 @Dao
 abstract class ImagePreviewDao {
 

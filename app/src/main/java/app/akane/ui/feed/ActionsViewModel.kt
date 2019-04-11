@@ -20,14 +20,12 @@ import kotlinx.coroutines.plus
 import timber.log.Timber
 import javax.inject.Inject
 
-
 class ActionsViewModel @Inject constructor(
     app: Application,
     private val repository: PostActionsRepository,
     private val dispatchers: AppCoroutineDispatchers,
     val snackbarMessage: SnackbarMessage
 ) : AndroidViewModel(app) {
-
 
     private val supervisor = SupervisorJob()
     private val exceptionHandler =
@@ -80,7 +78,6 @@ class ActionsViewModel @Inject constructor(
         Timber.e(cause)
     }
 
-
     private fun runOnMain(action: () -> Unit) {
         scope.launch(dispatchers.main) {
             action()
@@ -100,7 +97,6 @@ class ActionsViewModel @Inject constructor(
             snackbarMessage.value = text
         }
     }
-
 
     override fun onCleared() {
         requester.stop()

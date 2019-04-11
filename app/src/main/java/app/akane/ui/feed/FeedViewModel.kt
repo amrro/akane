@@ -38,7 +38,6 @@ class FeedViewModel @AssistedInject constructor(
 
     private val scope = viewModelScope + supervisor + exceptionHandler
 
-
     internal fun setConfigs(
         name: String,
         sort: SubredditSort = SubredditSort.HOT,
@@ -55,7 +54,6 @@ class FeedViewModel @AssistedInject constructor(
         refresh()
     }
 
-
     private fun pagedList(): LiveData<PagedList<Post>> {
         return repository.observeForPaging(
             object : PagedList.BoundaryCallback<Post>() {
@@ -68,7 +66,6 @@ class FeedViewModel @AssistedInject constructor(
             })
     }
 
-
     /**
      * This method is responsible for firing or refreshing the list to get
      * user feed.
@@ -78,7 +75,6 @@ class FeedViewModel @AssistedInject constructor(
         safeRequest { repository.refresh() }
         setState { copy(isLoading = false) }
     }
-
 
     private fun onError(cause: Throwable) {
         runOnMain {
@@ -112,7 +108,6 @@ class FeedViewModel @AssistedInject constructor(
             snackbarMessage.value = text
         }
     }
-
 
     @AssistedInject.Factory
     interface Factory {

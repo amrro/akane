@@ -37,7 +37,6 @@ class FeedRemoteDataSource @Inject constructor(
             .build()
     }
 
-
     fun restart() {
         require(::pagination.isInitialized) {
             "FeedRemoteDataSource.restart(): Pagination is not initialized. call FeedRemoteDataSource#updateConfigs() first."
@@ -52,7 +51,6 @@ class FeedRemoteDataSource @Inject constructor(
 
         mapper(pagination.next().children)
     }
-
 
     companion object {
         const val LIMIT = 40

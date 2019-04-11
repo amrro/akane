@@ -10,13 +10,12 @@ import kotlinx.coroutines.newCoroutineContext
 import org.threeten.bp.DateTimeUtils
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZoneId
-import java.util.*
+import java.util.Date
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
 fun Date.toLocalDateTime(): LocalDateTime =
     LocalDateTime.ofInstant(DateTimeUtils.toInstant(this), ZoneId.systemDefault())
-
 
 fun Context.browse(url: String, newTask: Boolean = false): Boolean {
     return try {
@@ -32,7 +31,6 @@ fun Context.browse(url: String, newTask: Boolean = false): Boolean {
         false
     }
 }
-
 
 fun CoroutineScope.safeRequest(
     context: CoroutineContext = EmptyCoroutineContext,

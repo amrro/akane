@@ -1,14 +1,17 @@
 package app.akane.data.entity
 
 import android.os.Parcelable
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.Index
+import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 import net.dean.jraw.models.CommentSort
 import net.dean.jraw.models.DistinguishedStatus
 import net.dean.jraw.models.SubmissionPreview
 import net.dean.jraw.models.VoteDirection
 import org.threeten.bp.LocalDateTime
-
 
 @Entity(
     tableName = "post_info",
@@ -115,7 +118,6 @@ data class PostInfo(
 ) : Parcelable {
 
     constructor() : this(0)
-
 
     val linkToComments: String
         get() {

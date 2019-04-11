@@ -8,7 +8,6 @@ import dagger.android.support.DaggerFragment
 
 abstract class BaseMvRxFragment : DaggerFragment(), MvRxView, Injectable {
 
-
     override val mvrxViewModelStore by lazy { MvRxViewModelStore(viewModelStore) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,5 +19,4 @@ abstract class BaseMvRxFragment : DaggerFragment(), MvRxView, Injectable {
         super.onSaveInstanceState(outState)
         mvrxViewModelStore.saveViewModels(outState)
     }
-
 }

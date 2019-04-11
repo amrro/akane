@@ -7,7 +7,6 @@ import androidx.lifecycle.Observer
 import timber.log.Timber
 import java.util.concurrent.atomic.AtomicBoolean
 
-
 /**
  * A lifecycle-aware observable that sends only new updates after subscription, used for events like
  * navigation and Snackbar messages.
@@ -19,7 +18,7 @@ import java.util.concurrent.atomic.AtomicBoolean
  * Note that only one observer is going to be notified of changes.
  */
 open class SingleLiveEvent<T>(
-        private val errorOnNoObservers: Boolean = false
+    private val errorOnNoObservers: Boolean = false
 ) : MutableLiveData<T>() {
 
     private val pending = AtomicBoolean(false)

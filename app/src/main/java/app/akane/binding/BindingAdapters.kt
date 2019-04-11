@@ -1,7 +1,6 @@
 package app.akane.binding
 
 import android.graphics.Color
-import android.graphics.ColorSpace
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
@@ -20,7 +19,6 @@ import net.dean.jraw.models.VoteDirection
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.temporal.ChronoUnit
 import kotlin.math.roundToInt
-
 
 /**
  * Data Binding adapters specific to the app.
@@ -77,7 +75,6 @@ object BindingAdapters {
     fun setVote(imageButton: ImageButton, vote: VoteDirection) {
         imageButton.isSelected = false
 
-
         if (imageButton.tag == "upvote" && vote == VoteDirection.UP) {
             imageButton.isSelected = true
         }
@@ -119,7 +116,6 @@ object BindingAdapters {
             Spannable.SPAN_EXCLUSIVE_INCLUSIVE
         )
     }
-
 
     /**
      * TODO: This method is needed to be tested and optimized to be more accurate.
@@ -169,5 +165,4 @@ object BindingAdapters {
             return
         }
     }
-
 }

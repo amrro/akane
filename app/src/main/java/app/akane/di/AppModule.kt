@@ -5,14 +5,13 @@ import app.akane.util.AppCoroutineDispatchers
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import net.dean.jraw.android.AndroidHelper
 import net.dean.jraw.android.ManifestAppInfoProvider
 import net.dean.jraw.android.SharedPreferencesTokenStore
 import net.dean.jraw.models.PersistedAuthData
 import net.dean.jraw.oauth.AccountHelper
-import java.util.*
+import java.util.TreeMap
+import java.util.UUID
 import javax.inject.Singleton
 
 @Module(includes = [ViewModelModule::class])
@@ -54,5 +53,4 @@ class AppModule {
         computation = Dispatchers.Default,
         main = Dispatchers.Main
     )
-
 }

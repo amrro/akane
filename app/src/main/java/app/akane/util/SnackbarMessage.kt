@@ -4,7 +4,6 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import javax.inject.Inject
 
-
 class SnackbarMessage @Inject constructor() : SingleLiveEvent<String>() {
 
     fun observe(owner: LifecycleOwner, observer: SnackbarObserver) {

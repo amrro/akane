@@ -1,6 +1,5 @@
 package app.akane.ui.feed
 
-
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -25,7 +24,6 @@ import com.google.android.material.snackbar.Snackbar
 import net.dean.jraw.models.SubredditSort
 import net.dean.jraw.models.TimePeriod
 import javax.inject.Inject
-
 
 class FeedListFragment : BaseMvRxFragment() {
 
@@ -57,11 +55,9 @@ class FeedListFragment : BaseMvRxFragment() {
                     actionsViewModel.downvote(post.postInfo.id)
                 }
 
-
                 override fun share(post: Post) {
                     sharePost(post)
                 }
-
 
                 override fun moreOptions(view: View, info: PostInfo) {
                     val moreOptionsPopMenu = PopupMenu(context, view)
@@ -101,13 +97,13 @@ class FeedListFragment : BaseMvRxFragment() {
                     }
 
                     override fun onTimePeriodClicked(view: View) {
-
                     }
                 })
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
@@ -199,7 +195,6 @@ class FeedListFragment : BaseMvRxFragment() {
 
             this.show()
         }
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -222,7 +217,6 @@ class FeedListFragment : BaseMvRxFragment() {
             timePeriod = timePeriod
         )
     }
-
 
     override fun invalidate() {
         withState(feedViewModel) { state ->
@@ -253,7 +247,6 @@ class FeedListFragment : BaseMvRxFragment() {
             }
         }
     }
-
 
     companion object {
         private const val KEY_SUBREDDIT_NAME = "key-subreddit-name"
