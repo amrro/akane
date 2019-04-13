@@ -39,7 +39,7 @@ class FeedListFragment : BaseMvRxFragment() {
     private lateinit var actionsViewModel: ActionsViewModel
 
     private val subredditName: String by lazy {
-        requireArguments().getString(KEY_SUBREDDIT_NAME)
+        requireArguments().getString(KEY_SUBREDDIT_NAME, "")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

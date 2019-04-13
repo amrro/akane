@@ -1,8 +1,7 @@
 package app.akane.ui.auth
 
 import android.util.Log
-import app.akane.util.AppCoroutineDispatchers
-import kotlinx.coroutines.withContext
+import app.akane.util.exception.MustLoginException
 import net.dean.jraw.RedditClient
 import net.dean.jraw.android.SimpleAndroidLogAdapter
 import net.dean.jraw.http.SimpleHttpLogger
@@ -12,12 +11,11 @@ import javax.inject.Singleton
 
 @Singleton
 class RedditManager @Inject constructor(
-    internal val accountHelper: AccountHelper,
-    private val dispatchers: AppCoroutineDispatchers
+    internal val accountHelper: AccountHelper
 ) {
 
-    suspend fun reddit(): RedditClient = withContext(dispatchers.io) {
-        if (accountHelper.isAuthenticated()) accountHelper.reddit
+    suspend fun reddit(): RedditClient {
+        return if (accountHelper.isAuthenticated()) accountHelper.reddit
         else accountHelper.switchToUserless()
     }
 
@@ -29,6 +27,15 @@ class RedditManager @Inject constructor(
     ) {
         accountHelper.onSwitch(configure)
     }
+
+    @Throws(MustLoginException::class)
+    suspend fun <T> request(block: suspend RedditClient.() -> T): T {
+        if (!this@RedditManager.isUserless())
+            return block(reddit())
+        else
+            throw MustLoginException()
+    }
+
 
     fun isLoggedIn(): Boolean {
         return accountHelper.isAuthenticated()
