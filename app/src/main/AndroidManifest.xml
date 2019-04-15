@@ -23,8 +23,6 @@
             android:theme="@style/Theme.Akane" />
 
 
-        <activity android:name=".ui.auth.NewUserActivity" />
-
         <activity-alias
             android:name=".Launcher"
             android:label="@string/app_name"

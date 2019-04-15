@@ -12,11 +12,6 @@ import dagger.multibindings.IntoMap
 @Module
 abstract class ViewModelModule {
 
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(FeedViewModel::class)
-//    abstract fun bindFeedViewModel(feedViewModel: FeedViewModel): ViewModel
-
     @Binds
     @IntoMap
     @ViewModelKey(ActionsViewModel::class)

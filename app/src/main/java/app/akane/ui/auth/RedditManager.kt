@@ -36,7 +36,6 @@ class RedditManager @Inject constructor(
             throw MustLoginException()
     }
 
-
     fun isLoggedIn(): Boolean {
         return accountHelper.isAuthenticated()
     }
