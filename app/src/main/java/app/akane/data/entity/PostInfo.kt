@@ -1,12 +1,10 @@
 package app.akane.data.entity
 
-import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import kotlinx.android.parcel.Parcelize
 import net.dean.jraw.models.CommentSort
 import net.dean.jraw.models.DistinguishedStatus
 import net.dean.jraw.models.SubmissionPreview
@@ -19,7 +17,6 @@ import org.threeten.bp.LocalDateTime
         Index(value = ["id"], unique = true)
     ]
 )
-@Parcelize
 data class PostInfo(
 
     @PrimaryKey(autoGenerate = true)
@@ -115,7 +112,7 @@ data class PostInfo(
 
     @ColumnInfo(name = "listing")
     var listing: String = ""
-) : Parcelable {
+) {
 
     constructor() : this(0)
 

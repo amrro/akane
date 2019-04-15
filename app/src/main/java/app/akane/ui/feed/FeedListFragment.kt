@@ -25,7 +25,9 @@ import net.dean.jraw.models.SubredditSort
 import net.dean.jraw.models.TimePeriod
 import javax.inject.Inject
 
-class FeedListFragment : BaseMvRxFragment() {
+class FeedListFragment(
+    override val mvrxViewId: String = "FeedListFragment"
+) : BaseMvRxFragment() {
 
     @Inject
     lateinit var feedViewModelFactory: FeedViewModel.Factory

@@ -87,16 +87,18 @@ dependencies {
     debugImplementation Deps.LeakCanary.fragment
 
     implementation Deps.Paging.runtime
-    implementation Deps.Paging.rxjava2
+    implementation Deps.Paging.common
+
+    implementation Deps.Navigation.fragment
+    implementation Deps.Navigation.navigationUI
 
     implementation Deps.Epoxy.epoxy
     implementation Deps.Epoxy.paging
     implementation Deps.Epoxy.dataBinding
     kapt Deps.Epoxy.processor
     implementation Deps.MvRx.mvrx
-    implementation "androidx.paging:paging-runtime-ktx:2.1.0"
 
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.1.2'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.0'
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 
     implementation Deps.Helpers.timber
@@ -106,7 +108,4 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'
 }

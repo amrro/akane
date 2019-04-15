@@ -7,7 +7,6 @@ buildscript {
     repositories {
         google()
         jcenter()
-        maven { url "https://dl.bintray.com/arrow-kt/arrow-kt/" }
         maven { url 'https://oss.jfrog.org/artifactory/oss-snapshot-local/' }
         
     }
@@ -20,14 +19,13 @@ buildscript {
 
 plugins {
     id "com.diffplug.gradle.spotless" version "3.21.1"
-    id 'com.github.ben-manes.versions' version "0.20.0"
+    id 'com.github.ben-manes.versions' version "0.21.0"
 }
 
 allprojects {
     repositories {
         google()
         jcenter()
-        maven { url "https://dl.bintray.com/arrow-kt/arrow-kt/" }
         maven { url 'https://oss.jfrog.org/artifactory/oss-snapshot-local/' }
     }
 }

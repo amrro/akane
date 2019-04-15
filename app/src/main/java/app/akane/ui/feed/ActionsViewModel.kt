@@ -61,7 +61,7 @@ class ActionsViewModel @Inject constructor(
 
     fun copyPostLink(info: PostInfo) {
         (getApplication<AkaneApp>().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager?)?.run {
-            primaryClip = ClipData.newPlainText(info.title, info.linkToComments)
+            this.setPrimaryClip(ClipData.newPlainText(info.title, info.linkToComments))
             sendMessage("🧷 Copied! ")
         }
     }

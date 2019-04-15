@@ -7,7 +7,7 @@ object Deps {
     }
 
     object Kotlin {
-        private const val version = "1.3.21"
+        private const val version = "1.3.30"
         val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
         val reflect = "org.jetbrains.kotlin:kotlin-reflect:$version"
         val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
@@ -62,31 +62,36 @@ object Deps {
     }
 
     object AssistedInject {
-        private const val version = "0.3.3"
+        private const val version = "0.4.0"
         val annotationDagger2 = "com.squareup.inject:assisted-inject-annotations-dagger2:$version"
         val processorDagger2 = "com.squareup.inject:assisted-inject-processor-dagger2:$version"
     }
 
     object Paging {
         private const val version = "2.1.0"
-        val common = "androidx.paging:paging-common:$version"
-        val runtime = "androidx.paging:paging-runtime:$version"
-        val rxjava2 = "androidx.paging:paging-rxjava2:$version"
+        val common = "androidx.paging:paging-common-ktx:$version"
+        val runtime = "androidx.paging:paging-runtime-ktx:$version"
     }
 
     object Coroutines {
-        private const val version = "1.2.0-alpha-2"
+        private const val version = "1.2.0"
         val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
         val rx2 = "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$version"
         val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
     }
 
     object Room {
-        private const val version = "2.1.0-alpha04"
+        private const val version = "2.1.0-alpha06"
         val common = "androidx.room:room-common:$version"
         val runtime = "androidx.room:room-runtime:$version"
-        val coroutine = "androidx.room:room-coroutines:$version"
+        val coroutine = "androidx.room:room-ktx:$version"
         val compiler = "androidx.room:room-compiler:$version"
+    }
+
+    object Navigation {
+        private const val version = "2.1.0-alpha02"
+        val fragment = "androidx.navigation:navigation-fragment-ktx:$version"
+        val navigationUI = "androidx.navigation:navigation-ui-ktx:$version"
     }
 
     object Fragment {
@@ -96,7 +101,7 @@ object Deps {
     }
 
     object Lifecycle {
-        private const val version = "2.1.0-alpha03"
+        private const val version = "2.1.0-alpha04"
         val extension = "androidx.lifecycle:lifecycle-extensions:$version"
         val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
     }
@@ -106,7 +111,7 @@ object Deps {
     }
 
     object Epoxy {
-        private const val version = "3.3.0"
+        private const val version = "3.4.0"
         val epoxy = "com.airbnb.android:epoxy:$version"
         val paging = "com.airbnb.android:epoxy-paging:$version"
         val dataBinding = "com.airbnb.android:epoxy-databinding:$version"
@@ -119,7 +124,7 @@ object Deps {
     }
 
     object MvRx {
-        private const val version = "0.7.0"
+        private const val version = "1.0.0"
         val mvrx = "com.airbnb.android:mvrx:$version"
     }
 
