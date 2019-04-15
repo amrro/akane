@@ -4,6 +4,7 @@ import androidx.room.TypeConverter
 import app.akane.data.entity.ImagePreview
 import net.dean.jraw.models.CommentSort
 import net.dean.jraw.models.DistinguishedStatus
+import net.dean.jraw.models.Subreddit
 import net.dean.jraw.models.VoteDirection
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
@@ -55,4 +56,12 @@ object AkaneTypeConverters {
     @TypeConverter
     @JvmStatic
     fun fromImageType(type: ImagePreview.ImageType) = type.toString()
+
+    @TypeConverter
+    @JvmStatic
+    fun fromSubmissionType(type: Subreddit.SubmissionType?) = type?.toString()
+
+    @TypeConverter
+    @JvmStatic
+    fun toSubmissionType(sort: String?) = sort?.let { Subreddit.SubmissionType.valueOf(it) }
 }
