@@ -25,7 +25,10 @@ jobs:
       #          name: Run Tests
       #          command: ./gradlew lint test
       - run:
-          name: Build debug APK and release APK
+          - name: Check lint
+          - command: ./gradlew app:lintDebug spotlessCheck
+      - run:
+          name: Build debug APK
           command: |
             ./gradlew :app:assembleDebug
             ./gradlew :app:assembleDebugAndroidTest
