@@ -1,4 +1,4 @@
-package app.akane.data.db
+package app.akane.data
 
 import androidx.room.TypeConverter
 import app.akane.data.entity.ImagePreview
@@ -8,6 +8,7 @@ import net.dean.jraw.models.Subreddit
 import net.dean.jraw.models.VoteDirection
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
+
 
 object AkaneTypeConverters {
     private val formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME

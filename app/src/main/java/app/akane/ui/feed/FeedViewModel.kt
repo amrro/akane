@@ -7,7 +7,6 @@ import app.akane.data.entity.Post
 import app.akane.data.repo.feed.FeedRepository
 import app.akane.util.AppCoroutineDispatchers
 import app.akane.util.SnackbarMessage
-import app.akane.util.notNullOrEmpty
 import com.airbnb.mvrx.BaseMvRxViewModel
 import com.airbnb.mvrx.FragmentViewModelContext
 import com.airbnb.mvrx.MvRxViewModelFactory
@@ -43,11 +42,7 @@ class FeedViewModel @AssistedInject constructor(
         sort: SubredditSort = SubredditSort.HOT,
         timePeriod: TimePeriod? = null
     ) = safeRequest {
-        repository.updateConfigs(
-            name.notNullOrEmpty { "FeedViewModel.setConfigs(name: $name): name of subreddit cannot be null!" },
-            sort,
-            timePeriod
-        )
+        repository.updateConfigs(name, sort, timePeriod)
 
         // TODO: Move this line from here.
         setState { copy(feed = pagedList()) }

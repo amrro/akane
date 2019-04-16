@@ -2,6 +2,7 @@ package app.akane.di
 
 import android.app.Application
 import app.akane.AkaneApp
+import app.akane.data.DatabaseMoudle
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule

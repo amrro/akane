@@ -1,10 +1,10 @@
 package app.akane.data.repo.feed
 
+import androidx.paging.DataSource
 import app.akane.data.dao.ImagePreviewDao
 import app.akane.data.dao.PostDao
 import app.akane.data.entity.Post
 import app.akane.data.entity.PostInfo
-import app.akane.util.notNullOrEmpty
 import javax.inject.Inject
 
 class FeedLocalDataSource @Inject constructor(
@@ -12,10 +12,10 @@ class FeedLocalDataSource @Inject constructor(
     private val imagesDao: ImagePreviewDao
 ) {
 
-    fun observeForPaging(subreddit: String?) =
-        postDao.observeForPaging(subreddit.notNullOrEmpty {
-            "Repository.subredditName(String): subreddit Name cannot be empty"
-        })
+    fun observeForPaging(subreddit: String): DataSource.Factory<Int, Post> {
+        return if (subreddit.isNotEmpty()) postDao.observeForPaging(subreddit)
+        else throw IllegalStateException("subreddit's name cannot be empty.")
+    }
 
     suspend fun insertAll(entries: List<Post>, reset: Boolean) {
         if (reset) {

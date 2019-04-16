@@ -13,7 +13,7 @@ class FeedRepository @Inject constructor(
     private val frontPageRemote: FeedRemoteDataSource
 ) {
 
-    private var subreddit: String? = null
+    private var subreddit: String = ""
 
     fun observeForPaging(
         callback: PagedList.BoundaryCallback<Post>

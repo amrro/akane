@@ -1,4 +1,4 @@
-package app.akane.data.db
+package app.akane.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

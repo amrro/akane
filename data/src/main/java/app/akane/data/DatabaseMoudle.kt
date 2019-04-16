@@ -1,9 +1,8 @@
-package app.akane.di
+package app.akane.data
 
 import android.app.Application
 import android.os.Debug
 import androidx.room.Room
-import app.akane.data.db.AkaneDataBase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

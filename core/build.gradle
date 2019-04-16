@@ -1,0 +1,14 @@
+import app.akane.Deps
+
+apply plugin: 'kotlin'
+
+dependencies {
+    api Deps.Helpers.timber
+    api 'com.jakewharton.threetenabp:threetenabp:1.2.0'
+
+    api Deps.Dagger.dagger
+    api Deps.Dagger.androidSupport
+
+    api Deps.Coroutines.core
+}
+

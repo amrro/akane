@@ -1,7 +1,7 @@
 package app.akane.data.mapper
 
 import app.akane.data.entity.Subreddit
-import app.akane.util.toLocalDateTime
+import app.akane.data.toLocalDateTime
 import javax.inject.Inject
 
 class SubredditMapper @Inject constructor() {
