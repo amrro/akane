@@ -36,8 +36,8 @@ android {
 
 dependencies {
     implementation project(":core")
-    api Deps.API.jraw
-    api Deps.Room.runtime
+    implementation Deps.API.jraw
+    implementation Deps.Room.runtime
     implementation Deps.Room.coroutine
     implementation Deps.Paging.runtime
 
