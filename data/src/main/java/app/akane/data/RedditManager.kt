@@ -1,7 +1,6 @@
-package app.akane.ui.auth
+package app.akane.data
 
-import android.util.Log
-import app.akane.util.exception.MustLoginException
+import app.akane.data.util.MustLoginException
 import net.dean.jraw.RedditClient
 import net.dean.jraw.android.SimpleAndroidLogAdapter
 import net.dean.jraw.http.SimpleHttpLogger
@@ -11,7 +10,7 @@ import javax.inject.Singleton
 
 @Singleton
 class RedditManager @Inject constructor(
-    internal val accountHelper: AccountHelper
+    val accountHelper: AccountHelper
 ) {
 
     suspend fun reddit(): RedditClient {
@@ -21,7 +20,7 @@ class RedditManager @Inject constructor(
 
     fun onSwitch(
         configure: (r: RedditClient) -> Unit = {
-            val logAdapter = SimpleAndroidLogAdapter(Log.INFO)
+            val logAdapter = SimpleAndroidLogAdapter()
             it.logger = SimpleHttpLogger(SimpleHttpLogger.DEFAULT_LINE_LENGTH, logAdapter)
         }
     ) {
@@ -29,11 +28,15 @@ class RedditManager @Inject constructor(
     }
 
     @Throws(MustLoginException::class)
-    suspend fun <T> request(block: suspend RedditClient.() -> T): T {
-        if (!this@RedditManager.isUserless())
-            return block(reddit())
-        else
-            throw MustLoginException()
+    suspend fun <T> request(requireAuth: Boolean = true, block: suspend RedditClient.() -> T): T {
+        return if (requireAuth) {
+            if (!this@RedditManager.isUserless())
+                block(reddit())
+            else
+                throw MustLoginException()
+        } else {
+            block(reddit())
+        }
     }
 
     fun isLoggedIn(): Boolean {
@@ -49,7 +52,6 @@ class RedditManager @Inject constructor(
     }
 
     companion object {
-
         const val USERNAME_USERLESS = "<userless>"
         val SCOPES = arrayOf("read", "identity", "vote", "save", "report")
     }

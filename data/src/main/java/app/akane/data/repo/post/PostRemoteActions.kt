@@ -1,6 +1,6 @@
 package app.akane.data.repo.post
 
-import app.akane.ui.auth.RedditManager
+import app.akane.data.RedditManager
 import net.dean.jraw.models.VoteDirection
 import javax.inject.Inject
 

@@ -18,6 +18,7 @@ package app.akane.di
 
 import app.akane.ui.auth.NewUserFragment
 import app.akane.ui.feed.FeedListFragment
+import app.akane.ui.subreddit.SubredditFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -30,4 +31,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeNewUserFragment(): NewUserFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeSubredditFragment(): SubredditFragment
 }

@@ -63,7 +63,6 @@ dependencies {
     implementation Deps.AndroidX.legacy
     // implementation Deps.AndroidX.viewpager
     implementation Deps.AndroidX.recyclerView
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt Deps.Dagger.compiler
     kapt Deps.Dagger.androidProcessor
 

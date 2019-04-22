@@ -2,7 +2,7 @@ package app.akane.di
 
 import android.app.Application
 import app.akane.AkaneApp
-import app.akane.data.DatabaseMoudle
+import app.akane.data.DatabaseModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -15,7 +15,7 @@ import javax.inject.Singleton
             AppModule::class,
             MainActivityModule::class,
             AppAssistedModule::class,
-            DatabaseMoudle::class
+            DatabaseModule::class
         ]
 )
 interface AppComponent {

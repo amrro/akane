@@ -9,10 +9,10 @@ import androidx.lifecycle.viewModelScope
 import app.akane.AkaneApp
 import app.akane.data.entity.PostInfo
 import app.akane.data.repo.post.PostActionsRepository
+import app.akane.data.util.MustLoginException
 import app.akane.util.AppCoroutineDispatchers
 import app.akane.util.SnackbarMessage
 import app.akane.util.browse
-import app.akane.util.exception.MustLoginException
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch

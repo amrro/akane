@@ -16,10 +16,10 @@ import app.akane.data.entity.Subreddit
         ImagePreview::class,
         Subreddit::class
     ],
-    version = 3 // 3
+    version = 4
 )
 @TypeConverters(AkaneTypeConverters::class)
-abstract class AkaneDataBase : RoomDatabase() {
+abstract class AkaneDb : RoomDatabase() {
     abstract fun postDao(): PostDao
     abstract fun imagePreviewDao(): ImagePreviewDao
     abstract fun subredditDao(): SubredditDao

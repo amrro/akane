@@ -40,7 +40,6 @@ object AkaneTypeConverters {
         return DistinguishedStatus.valueOf(status)
     }
 
-    // net.dean.jraw.models.VoteDirection
     @TypeConverter
     @JvmStatic
     fun toVoteDirection(vote: String) = VoteDirection.valueOf(vote)

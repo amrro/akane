@@ -7,15 +7,15 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-@Module
-class DatabaseMoudle {
+@Module(includes = [APIModule::class])
+class DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideDatabase(context: Application): AkaneDataBase {
+    fun provideDatabase(context: Application): AkaneDb {
         val builder = Room.databaseBuilder(
             context,
-            AkaneDataBase::class.java,
+            AkaneDb::class.java,
             "akane_reddit.db"
         ).fallbackToDestructiveMigration()
 
@@ -26,11 +26,11 @@ class DatabaseMoudle {
     }
 
     @Provides
-    fun providePostDao(db: AkaneDataBase) = db.postDao()
+    fun providePostDao(db: AkaneDb) = db.postDao()
 
     @Provides
-    fun provideImagePreviewDao(db: AkaneDataBase) = db.imagePreviewDao()
+    fun provideImagePreviewDao(db: AkaneDb) = db.imagePreviewDao()
 
     @Provides
-    fun provideSubredditDao(db: AkaneDataBase) = db.subredditDao()
+    fun provideSubredditDao(db: AkaneDb) = db.subredditDao()
 }

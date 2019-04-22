@@ -10,6 +10,7 @@ import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import app.akane.R
+import app.akane.data.RedditManager
 import app.akane.di.Injectable
 import app.akane.util.AppCoroutineDispatchers
 import com.google.android.material.snackbar.Snackbar
@@ -60,7 +61,7 @@ class NewUserFragment : Fragment(), Injectable {
                             helper.onUserChallenge(url)
                             findNavController().navigate(R.id.action_newUserFragment_to_homeFragment)
                         } catch (ex: Exception) {
-                            Snackbar.make(view, ex.localizedMessage, Snackbar.LENGTH_LONG)
+                            Snackbar.make(view, ex.localizedMessage ?: "Some error happens!", Snackbar.LENGTH_LONG)
                                 .show()
                             findNavController().navigateUp()
                         }

@@ -1,4 +1,4 @@
-package app.akane.data
+package app.akane.data.util
 
 import org.threeten.bp.DateTimeUtils
 import org.threeten.bp.LocalDateTime

@@ -2,8 +2,8 @@ package app.akane
 
 import android.app.Activity
 import android.app.Application
+import app.akane.data.RedditManager
 import app.akane.di.AppInjector
-import app.akane.ui.auth.RedditManager
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.squareup.leakcanary.LeakCanary
