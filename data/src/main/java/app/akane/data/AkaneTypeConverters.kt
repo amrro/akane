@@ -9,7 +9,6 @@ import net.dean.jraw.models.VoteDirection
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
 
-
 object AkaneTypeConverters {
     private val formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
 

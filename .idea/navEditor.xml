@@ -29,18 +29,6 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="mainActivity">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="710" />
-                            <option name="y" value="-1" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="newUserFragment">
                     <value>
                       <LayoutPositions>
@@ -52,7 +40,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_newUserFragment_to_mainActivity">
+                            <entry key="action_newUserFragment_to_homeFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

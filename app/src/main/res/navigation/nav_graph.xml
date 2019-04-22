@@ -9,23 +9,23 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="app.akane.ui.home.HomeFragment"
-        android:label="HomeFragment" >
+        android:label="HomeFragment">
         <action
             android:id="@+id/action_homeFragment_to_newUserFragment"
             app:destination="@id/newUserFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/newUserFragment"
         android:name="app.akane.ui.auth.NewUserFragment"
         android:label="fragment_new_user"
-        tools:layout="@layout/fragment_new_user" >
+        tools:layout="@layout/fragment_new_user">
         <action
-            android:id="@+id/action_newUserFragment_to_mainActivity"
-            app:destination="@id/mainActivity" />
+            android:id="@+id/action_newUserFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/homeFragment"
+            app:popUpToInclusive="true" />
     </fragment>
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="app.akane.MainActivity"
-        android:label="MainActivity" />
 
 </navigation>

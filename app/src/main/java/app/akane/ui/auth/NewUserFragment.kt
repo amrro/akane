@@ -2,7 +2,9 @@ package app.akane.ui.auth
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
@@ -19,13 +21,16 @@ import javax.inject.Inject
  * A simple [Fragment] subclass.
  */
 
-class NewUserFragment private constructor() : Fragment(), Injectable {
-
+class NewUserFragment : Fragment(), Injectable {
     @Inject
     lateinit var redditManager: RedditManager
 
     @Inject
     lateinit var dispatchers: AppCoroutineDispatchers
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_new_user, container, false)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,7 +58,7 @@ class NewUserFragment private constructor() : Fragment(), Injectable {
                     GlobalScope.launch(dispatchers.io) {
                         try {
                             helper.onUserChallenge(url)
-                            findNavController().navigate(R.id.action_newUserFragment_to_mainActivity)
+                            findNavController().navigate(R.id.action_newUserFragment_to_homeFragment)
                         } catch (ex: Exception) {
                             Snackbar.make(view, ex.localizedMessage, Snackbar.LENGTH_LONG)
                                 .show()
