@@ -86,6 +86,7 @@ object Deps {
         val runtime = "androidx.room:room-runtime:$version"
         val coroutine = "androidx.room:room-ktx:$version"
         val compiler = "androidx.room:room-compiler:$version"
+        val testing = "androidx.room:room-testing:$version"
     }
 
     object Navigation {
@@ -126,6 +127,27 @@ object Deps {
     object MvRx {
         private const val version = "1.0.0"
         val mvrx = "com.airbnb.android:mvrx:$version"
+    }
+
+
+    object Test {
+        val junit = "junit:junit:4.12"
+        val core = "androidx.test:core:1.0.0"
+        val mockito = "org.mockito:mockito-core:1.10.19"
+        val robolectric = "org.robolectric:robolectric:4.3-alpha-2"
+        val arch_core = "androidx.arch.core:core-testing:2.0.1"
+
+        object Espresso {
+            val core = "androidx.test.espresso:espresso-core:3.1.0"
+        }
+
+    }
+
+
+    object ATSL {
+        private const val version = "1.1.0-alpha4"
+        val runner = "androidx.test:runner:$version"
+        val rules = "androidx.test:rules:$version"
     }
 
 
