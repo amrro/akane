@@ -3,7 +3,7 @@ package app.akane.data.mapper
 import app.akane.data.entity.ImagePreview
 import app.akane.data.entity.Post
 import app.akane.data.entity.PostInfo
-import app.akane.data.toLocalDateTime
+import app.akane.data.util.toLocalDateTime
 import net.dean.jraw.models.CommentSort
 import net.dean.jraw.models.Submission
 import javax.inject.Inject

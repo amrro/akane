@@ -1,8 +1,8 @@
 package app.akane.data.repo.feed
 
 import app.akane.core.buildRequest
+import app.akane.data.RedditManager
 import app.akane.data.mapper.SubmissionToPost
-import app.akane.ui.auth.RedditManager
 import net.dean.jraw.models.Submission
 import net.dean.jraw.models.SubredditSort
 import net.dean.jraw.models.TimePeriod
