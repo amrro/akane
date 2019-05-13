@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.card.MaterialCardView
-        style="@style/Theme.Akane.CardView"
+        style="@style/Theme.Akane.RoundedCardView"
         android:layout_width="match_parent"
         app:onTouchListener="@{onTouchListner}"
         android:layout_height="wrap_content">

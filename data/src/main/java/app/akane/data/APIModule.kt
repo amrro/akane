@@ -12,7 +12,6 @@ import java.util.TreeMap
 import java.util.UUID
 import javax.inject.Singleton
 
-
 @Module
 class APIModule {
 

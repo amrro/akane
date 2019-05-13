@@ -7,7 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">@font/rubik_regular</item>
-        <!--        <item name="android:hyphenationFrequency">none</item>-->
+        <item name="materialCardViewStyle">@style/Theme.Akane.RoundedCardView</item>
     </style>
 
     <style name="Theme.Akane.NoActionBar">
@@ -20,8 +20,7 @@
     <style name="Theme.Akane.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
-    <style name="Theme.Akane.CardView" parent="Widget.MaterialComponents.CardView">
-        <item name="cardBackgroundColor">#FFFFFF</item>
+    <style name="Theme.Akane.RoundedCardView" parent="Widget.MaterialComponents.CardView">
         <item name="cardUseCompatPadding">true</item>
         <item name="cardPreventCornerOverlap">true</item>
         <item name="cardCornerRadius">8dp</item>

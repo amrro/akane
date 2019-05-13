@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import app.akane.data.entity.Post
 import app.akane.data.entity.PostInfo
-import app.akane.databinding.FragmentSubmissionsListBinding
+import app.akane.databinding.FragmentFeedListBinding
 import app.akane.util.BaseMvRxFragment
 import app.akane.util.SnackbarMessage
 import com.airbnb.mvrx.fragmentViewModel
@@ -35,7 +35,7 @@ class FeedListFragment(
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private lateinit var binding: FragmentSubmissionsListBinding
+    private lateinit var binding: FragmentFeedListBinding
     private lateinit var controller: FeedEpoxyController
     private val feedViewModel: FeedViewModel by fragmentViewModel()
     private lateinit var actionsViewModel: ActionsViewModel
@@ -110,7 +110,7 @@ class FeedListFragment(
     ): View? {
         binding = DataBindingUtil.inflate(
             inflater,
-            app.akane.R.layout.fragment_submissions_list,
+            app.akane.R.layout.fragment_feed_list,
             container,
             false
         )
