@@ -7,7 +7,7 @@ object Deps {
     }
 
     object Kotlin {
-        private const val version = "1.3.30"
+        private const val version = "1.3.31"
         val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
         val reflect = "org.jetbrains.kotlin:kotlin-reflect:$version"
         val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
@@ -24,10 +24,10 @@ object Deps {
     }
 
     object AndroidX {
-        val appcompat = "androidx.appcompat:appcompat:1.1.0-alpha04"
-        val recyclerView = "androidx.recyclerview:recyclerview:1.1.0-alpha04"
-        val corekts = "androidx.core:core-ktx:1.1.0-alpha05"
-        val constraint = "androidx.constraintlayout:constraintlayout:2.0.0-alpha4"
+        val appcompat = "androidx.appcompat:appcompat:1.1.0-alpha05"
+        val recyclerView = "androidx.recyclerview:recyclerview:1.1.0-alpha05"
+        val corekts = "androidx.core:core-ktx:1.2.0-alpha01"
+        val constraint = "androidx.constraintlayout:constraintlayout:2.0.0-beta1"
         val legacy = "androidx.legacy:legacy-support-v4:1.0.0"
         val viewpager2 = "androidx.viewpager2:viewpager2:1.0.0-alpha03"
     }
@@ -74,14 +74,14 @@ object Deps {
     }
 
     object Coroutines {
-        private const val version = "1.2.0"
+        private const val version = "1.2.1"
         val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
         val rx2 = "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$version"
         val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
     }
 
     object Room {
-        private const val version = "2.1.0-alpha06"
+        private const val version = "2.1.0-beta01"
         val common = "androidx.room:room-common:$version"
         val runtime = "androidx.room:room-runtime:$version"
         val coroutine = "androidx.room:room-ktx:$version"
@@ -90,19 +90,19 @@ object Deps {
     }
 
     object Navigation {
-        private const val version = "2.1.0-alpha02"
+        private const val version = "2.1.0-alpha04"
         val fragment = "androidx.navigation:navigation-fragment-ktx:$version"
         val navigationUI = "androidx.navigation:navigation-ui-ktx:$version"
     }
 
     object Fragment {
-        private const val version = "1.1.0-alpha06"
+        private const val version = "1.1.0-alpha09"
         val fragment = "androidx.fragment:fragment:$version"
         val fragmentKtx = "androidx.fragment:fragment-ktx:$version"
     }
 
     object Lifecycle {
-        private const val version = "2.1.0-alpha04"
+        private const val version = "2.2.0-alpha01"
         val extension = "androidx.lifecycle:lifecycle-extensions:$version"
         val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
     }
@@ -112,7 +112,7 @@ object Deps {
     }
 
     object Epoxy {
-        private const val version = "3.4.0"
+        private const val version = "3.5.1"
         val epoxy = "com.airbnb.android:epoxy:$version"
         val paging = "com.airbnb.android:epoxy-paging:$version"
         val dataBinding = "com.airbnb.android:epoxy-databinding:$version"
@@ -125,30 +125,30 @@ object Deps {
     }
 
     object MvRx {
-        private const val version = "1.0.0"
+        private const val version = "1.0.1"
         val mvrx = "com.airbnb.android:mvrx:$version"
     }
 
 
-    object Test {
-        val junit = "junit:junit:4.12"
-        val core = "androidx.test:core:1.0.0"
-        val mockito = "org.mockito:mockito-core:1.10.19"
-        val robolectric = "org.robolectric:robolectric:4.3-alpha-2"
-        val arch_core = "androidx.arch.core:core-testing:2.0.1"
-
-        object Espresso {
-            val core = "androidx.test.espresso:espresso-core:3.1.0"
-        }
-
-    }
-
-
-    object ATSL {
-        private const val version = "1.1.0-alpha4"
-        val runner = "androidx.test:runner:$version"
-        val rules = "androidx.test:rules:$version"
-    }
+//    object Test {
+//        val junit = "junit:junit:4.12"
+//        val core = "androidx.test:core:1.0.0"
+//        val mockito = "org.mockito:mockito-core:1.10.19"
+//        val robolectric = "org.robolectric:robolectric:4.3-alpha-2"
+//        val arch_core = "androidx.arch.core:core-testing:2.0.1"
+//
+//        object Espresso {
+//            val core = "androidx.test.espresso:espresso-core:3.1.0"
+//        }
+//
+//    }
+//
+//
+//    object ATSL {
+//        private const val version = "1.1.0-alpha4"
+//        val runner = "androidx.test:runner:$version"
+//        val rules = "androidx.test:rules:$version"
+//    }
 
 
 }

@@ -50,16 +50,16 @@ dependencies {
     kapt Deps.Room.compiler
     kapt Deps.Dagger.compiler
 
-    testImplementation Deps.Test.arch_core
-    testImplementation Deps.Test.junit
-    testImplementation Deps.Test.core
-    testImplementation Deps.Room.testing
-    testImplementation Deps.Test.robolectric
-    testImplementation Deps.Coroutines.android
-
-    androidTestImplementation Deps.ATSL.runner
-    androidTestImplementation Deps.ATSL.rules
-    androidTestImplementation Deps.Test.arch_core
+//    testImplementation Deps.Test.arch_core
+//    testImplementation Deps.Test.junit
+//    testImplementation Deps.Test.core
+//    testImplementation Deps.Room.testing
+//    testImplementation Deps.Test.robolectric
+//    testImplementation Deps.Coroutines.android
+//
+//    androidTestImplementation Deps.ATSL.runner
+//    androidTestImplementation Deps.ATSL.rules
+//    androidTestImplementation Deps.Test.arch_core
 
 
 }
